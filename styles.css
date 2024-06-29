@@ -1,100 +1,61 @@
 body {
-  background-image: url(https://cdn.freecodecamp.org/curriculum/css-cafe/beans.jpg);
-  font-family: sans-serif;
-  padding: 20px;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+    color: black;
 }
 
-h1 {
-  font-size: 40px;
-  margin-top: 0;
-  margin-bottom: 15px;
+header {
+    text-align: center;
+    margin-bottom: 50px;
 }
 
-h2 {
-  font-size: 30px;
+header h1 {
+    font-size: 2.5em;
+    font-weight: normal;
+    border-bottom: 2px solid black;
+    display: inline-block;
+    padding-bottom: 10px;
 }
 
-.established {
-  font-style: italic;
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
 }
 
-h1,
-h2,
-p {
-  text-align: center;
+.folder-container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
 }
 
-.menu {
-  width: 80%;
-  background-color: burlywood;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  max-width: 500px;
+.folder {
+    text-align: center;
+    margin: 0 20px;
 }
 
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -25px;
+.folder img {
+    width: 100px;
+    height: auto;
 }
 
-hr {
-  height: 2px;
-  background-color: brown;
-  border-color: brown;
+.folder p {
+    font-size: 1.2em;
+    margin-top: 10px;
 }
-
-.bottom-line {
-  margin-top: 25px;
-}
-
-h1,
-h2 {
-  font-family: Impact, serif;
-}
-
-.item p {
-  display: inline-block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 18px;
-}
-
-.flavor,
-.dessert {
-  text-align: left;
-  width: 75%;
-}
-
-.price {
-  text-align: right;
-  width: 25%;
-}
-
-/* FOOTER */
 
 footer {
-  font-size: 14px;
+    text-align: center;
+    margin-top: 50px;
 }
 
-.address {
-  margin-bottom: 5px;
-}
-
-a {
-  color: black;
-}
-
-a:visited {
-  color: black;
-}
-
-a:hover {
-  color: brown;
-}
-
-a:active {
-  color: brown;
+footer p {
+    font-size: 1.2em;
 }
