@@ -8,12 +8,13 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ title, description, slug }: ProjectCardProps) => {
   return (
-    <div className="border border-text p-6 hover:bg-white/5 transition-colors duration-300">
-      <Link href={`/work/${slug}`} className="no-underline hover:no-underline">
-        <h3 className="text-2xl md:text-3xl font-serif mb-3">{title}</h3>
-        <p className="font-sans text-sm">{description}</p>
-      </Link>
-    </div>
+    <Link 
+      href={`/work/${slug}`} 
+      className="border border-text p-6 no-underline hover:no-underline hover:bg-text hover:text-background transition-colors duration-300"
+    >
+      <h3 className="text-2xl md:text-3xl font-serif mb-3">{title}</h3>
+      <p className="font-sans text-sm">{description}</p>
+    </Link>
   );
 };
 
