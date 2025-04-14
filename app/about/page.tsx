@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import SectionTitle from '@/components/SectionTitle';
 import Link from 'next/link';
 
 export default function AboutPage() {
   return (
     <div className="py-16">
-      <SectionTitle>ABOUT ME</SectionTitle>
+      <h2 className="text-4xl md:text-5xl font-serif font-normal mb-8 mt-16">
+        ABOUT ME
+      </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16 mb-10">
         <div>

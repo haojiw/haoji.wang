@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import SectionTitle from '@/components/SectionTitle';
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 
@@ -8,11 +7,11 @@ export default function Home() {
     <>
       <section className="flex flex-col md:flex-row items-center justify-between py-16 border-b border-border">
         <div className="w-full md:w-3/5 mb-10 md:mb-0">
-          <h1 className="text-6xl md:text-7xl font-serif mb-8">
+          <h1 className="text-6xl md:text-7xl font-body font-normal mb-8">
             <span className="block mt-6">Haoji Wang</span>
           </h1>
           <p className="text-xl md:text-2xl font-serif tracking-wide">
-            This site is kinda like me: <br />
+            This site is a bit like me: <br />
             Still in progress, but you'll want to check back later.
           </p>
         </div>
@@ -31,14 +30,18 @@ export default function Home() {
       </section>
 
       <section className="border-b border-border py-6">
-        <SectionTitle>BLOG</SectionTitle>
+        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
+          BLOG
+        </h2>
         <p className="text-lg md:text-xl mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auc a preitum enim, ut volutpat urna. Ullamcorper blandit nec semper, suvinas maulis ac oditus.
         </p>
       </section>
 
       <section className="border-b border-border py-6">
-        <SectionTitle>WORK</SectionTitle>
+        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
+          WORK
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-6">
           <ProjectCard
             title="Project One"
@@ -59,7 +62,9 @@ export default function Home() {
       </section>
 
       <section className="py-6">
-        <SectionTitle>ABOUT</SectionTitle>
+        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
+          ABOUT ME
+        </h2>
         <p className="text-lg md:text-xl mb-10">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auc a preitum enim, ut volutpat urna. Ullamcorper blandit nec semper, suvinas maulis ac oditus.
         </p>

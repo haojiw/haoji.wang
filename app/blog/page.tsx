@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import SectionTitle from '@/components/SectionTitle';
 
 type BlogPost = {
   slug: string;
@@ -33,7 +32,9 @@ const DUMMY_POSTS: BlogPost[] = [
 export default function BlogPage() {
   return (
     <div className="py-16">
-      <SectionTitle>BLOG</SectionTitle>
+      <h2 className="text-4xl md:text-5xl font-serif2 font-bold mb-8 mt-16">
+        BLOG
+      </h2>
       <p className="font-body text-lg mb-12">
         That's what I'm talking about!
       </p>

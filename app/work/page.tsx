@@ -1,4 +1,3 @@
-import SectionTitle from '@/components/SectionTitle';
 import ProjectCard from '@/components/ProjectCard';
 
 // This is a placeholder. In a real implementation, you'd fetch actual projects.
@@ -38,7 +37,9 @@ const PROJECTS = [
 export default function ProjectsPage() {
   return (
     <div className="py-16">
-      <SectionTitle>WORK</SectionTitle>
+      <h2 className="text-4xl md:text-5xl font-serif2 font-bold mb-8 mt-16">
+        WORK
+      </h2>
       <p className="font-body text-lg mb-12">
         Things I've built.
       </p>
