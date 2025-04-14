@@ -1,0 +1,64 @@
+---
+title: My First Blog Post
+date: January 1, 2023
+description: An introduction to my blog and what to expect.
+---
+
+Ever Since I was a jit I been legit gang. 
+
+
+## What to Expect
+
+In this blog, you can expect:
+
+- Tutorials on frontend development
+- Thoughts on design systems
+- Reviews of new tools and technologies
+- Personal projects and case studies
+
+## My Approach to Web Development
+
+I believe in clean, semantic code that is accessible to everyone. My projects are built with performance and user experience in mind, using modern technologies while ensuring backward compatibility.
+
+> Good design is as little design as possible. - Dieter Rams
+
+### The Technologies I Love
+
+Currently, I'm excited about:
+
+1. Next.js and React server components
+2. Tailwind CSS for styling
+3. TypeScript for type safety
+4. Design systems for consistency
+
+## Code Example
+
+Here's a simple React component using TypeScript:
+
+```tsx
+import { useState } from 'react';
+
+type CounterProps = {
+  initialValue?: number;
+};
+
+const Counter = ({ initialValue = 0 }: CounterProps) => {
+  const [count, setCount] = useState(initialValue);
+  
+  return (
+    <div className="p-4 border rounded">
+      <p className="text-xl">Count: {count}</p>
+      <button 
+        onClick={() => setCount(count + 1)}
+        className="px-4 py-2 bg-blue-500 text-white rounded mt-2"
+      >
+        Increment
+      </button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+Thanks for reading my first post! Stay tuned for more content coming soon. 
