@@ -25,7 +25,9 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
   // Read the file content
   const rawContent = fs.readFileSync(postPath, 'utf8');
-  const { content, data } = matter(rawContent) as { content: string; data: Frontmatter };
+  const matterResult = matter(rawContent);
+  const { content } = matterResult;
+  const data = matterResult.data as Frontmatter;
   
   // Custom components for MDX
   const components = {
@@ -78,7 +80,6 @@ export default async function BlogPost({ params }: { params: { slug: string } })
         </h1>
       </div>
       <div className="prose prose-lg">
-        {/* @ts-expect-error Server Component */}
         <MDXRemote source={content} components={components} />
       </div>
     </article>
