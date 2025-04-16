@@ -3,7 +3,7 @@ import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 
 // Importing the blog post data
-import { DUMMY_POSTS, type BlogPost } from './blog/page';
+import { DUMMY_POSTS, type BlogPost } from './blog/data';
 
 export default function Home() {
   // Get the first 3 blog posts
