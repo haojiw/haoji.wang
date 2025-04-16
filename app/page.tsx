@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <section className="flex flex-col md:flex-row items-end justify-between py-16 border-b border-border">
         <div className="w-full md:w-3/5 flex flex-col justify-end h-full">
-          <h1 className="text-6xl md:text-7xl font-body font-normal mb-8">
+          <h1 className="text-6xl md:text-7xl font-body font-normal mb-8 text-accent">
             <span className="block mt-6">Haoji Wang</span>
           </h1>
           <div className="w-fit">
@@ -24,9 +24,9 @@ export default function Home() {
             <div className="flex justify-end">
               <Link 
                 href="/about" 
-                className="bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-text/75 transition-colors duration-300"
+                className="bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300"
               >
-                MORE ABOUT ME
+                Who's this guy?
               </Link>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function Home() {
       </section>
 
       <section className="border-b border-border py-6">
-        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
+        <h2 className="text-3xl md:text-4xl text-accent font-serif font-normal mb-8 mt-16">
           <Link href="/blog" className="no-underline hover:no-underline">
             BLOG
           </Link>
@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       <section className="py-6">
-        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
+        <h2 className="text-3xl md:text-4xl text-accent font-serif font-normal mb-8 mt-16">
           <Link href="/work" className="no-underline hover:no-underline">
             WORK
           </Link>

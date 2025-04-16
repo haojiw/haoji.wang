@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 // Collection of quotes to randomly select from
 const quotes = [
@@ -16,11 +17,11 @@ const quotes = [
 
 const Footer = () => {
   const [quote, setQuote] = useState('');
+  const pathname = usePathname();
 
   useEffect(() => {
-    // Select a random quote when component mounts
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-  }, []);
+  }, [pathname]);
 
   return (
     <footer className="py-6 mt-16 border-t border-border">
@@ -29,7 +30,7 @@ const Footer = () => {
         <div className="flex justify-center md:justify-start">
           <Link 
             href="mailto:on3hodge@gmail.com" 
-            className="inline-block px-4 py-2 border border-text rounded-full font-sans text-sm uppercase tracking-wide hover:bg-text hover:text-background transition-colors"
+            className="inline-block px-4 py-2 border border-text rounded-full font-sans text-sm uppercase tracking-wide hover:bg-accent hover:text-background transition-colors"
           >
             email
           </Link>
@@ -46,7 +47,7 @@ const Footer = () => {
             href="https://www.linkedin.com/in/haoji-wang/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-text hover:text-accent transition-colors duration-200"
+            className="text-accent hover:text-muted transition-colors"
             aria-label="LinkedIn"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -57,7 +58,7 @@ const Footer = () => {
             href="https://github.com/onehodge" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-text hover:text-accent transition-colors duration-200"
+            className="text-accent hover:text-muted transition-colors"
             aria-label="GitHub"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -68,7 +69,7 @@ const Footer = () => {
             href="https://x.com/haoji_1" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-text hover:text-accent transition-colors duration-200"
+            className="text-accent hover:text-muted transition-colors"
             aria-label="Twitter"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -79,7 +80,7 @@ const Footer = () => {
             href="https://www.instagram.com/onehodge/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-text hover:text-accent transition-colors duration-200"
+            className="text-accent hover:text-muted transition-colors"
             aria-label="Instagram"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

@@ -5,7 +5,7 @@ import ScrapbookSection from '@/components/ScrapbookSection';
 export default function AboutPage() {
   return (
     <div className="py-16">
-      <h2 className="text-4xl md:text-5xl font-serif font-normal mb-8 mt-16">
+      <h2 className="text-4xl md:text-5xl text-accent font-serif font-normal mb-8 mt-16">
         ABOUT ME
       </h2>
       
@@ -43,7 +43,7 @@ export default function AboutPage() {
       <div className="mb-16">
         <Link 
           href="/resume.pdf" // or change this to wherever your resume lives
-          className="inline-block bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-text/75 transition-colors duration-300"
+          className="inline-block bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300"
           target="_blank"
           rel="noopener noreferrer"
         >

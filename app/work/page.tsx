@@ -37,7 +37,7 @@ const PROJECTS = [
 export default function ProjectsPage() {
   return (
     <div className="py-16">
-      <h2 className="text-4xl md:text-5xl font-serif2 font-bold mb-8 mt-16">
+      <h2 className="text-4xl md:text-5xl text-accent font-serif2 font-bold mb-8 mt-16">
         WORK
       </h2>
       <p className="font-body text-lg mb-12">

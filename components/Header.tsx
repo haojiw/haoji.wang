@@ -5,7 +5,7 @@ const Header = () => {
     <header className="py-8 md:py-12">
       <nav className="flex flex-col md:flex-row md:items-center justify-between">
         <div className="text-xl md:text-xl font-body font-bold mb-4 md:mb-0">
-          <Link href="/" className="no-underline hover:no-underline">
+          <Link href="/" className="no-underline hover:no-underline text-accent">
             haoji.wang
           </Link>
         </div>

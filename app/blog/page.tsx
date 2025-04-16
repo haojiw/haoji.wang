@@ -4,7 +4,7 @@ import { DUMMY_POSTS } from './data';
 export default function BlogPage() {
   return (
     <div className="py-16">
-      <h2 className="text-4xl md:text-5xl font-serif2 font-bold mb-8 mt-16">
+      <h2 className="text-4xl md:text-5xl text-accent font-serif2 font-bold mb-8 mt-16">
         BLOG
       </h2>
       <p className="font-body text-lg mb-12">
@@ -23,11 +23,11 @@ export default function BlogPage() {
                   {post.title}
                 </Link>
               </h4>
-              <time className="font-sans text-sm uppercase tracking-wide text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <time className="font-sans uppercase tracking-wide text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {post.date}
               </time>
             </div>
-            <p className="font-serif text-base text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">
+            <p className="font-serif text-lg text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">
               {post.description}
             </p>
           </article>
