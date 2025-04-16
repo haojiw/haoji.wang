@@ -2,19 +2,36 @@ import Image from 'next/image';
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 
+// Importing the blog post data
+import { DUMMY_POSTS, type BlogPost } from './blog/page';
+
 export default function Home() {
+  // Get the first 3 blog posts
+  const recentPosts = DUMMY_POSTS.slice(0, 3);
+
   return (
     <>
-      <section className="flex flex-col md:flex-row items-center justify-between py-16 border-b border-border">
-        <div className="w-full md:w-3/5 mb-10 md:mb-0">
+      <section className="flex flex-col md:flex-row items-end justify-between py-16 border-b border-border">
+        <div className="w-full md:w-3/5 flex flex-col justify-end h-full">
           <h1 className="text-6xl md:text-7xl font-body font-normal mb-8">
             <span className="block mt-6">Haoji Wang</span>
           </h1>
-          <p className="text-xl md:text-2xl font-serif tracking-wide">
-            This site is a bit like me: <br />
-            Still in progress, but you'll want to check back later.
-          </p>
+          <div className="w-fit">
+            <p className="text-xl md:text-2xl font-serif tracking-wide mb-10">
+              This site is a bit like me: <br />
+              Still in progress, but you'll want to check back later.
+            </p>
+            <div className="flex justify-end">
+              <Link 
+                href="/about" 
+                className="bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-text/75 transition-colors duration-300"
+              >
+                MORE ABOUT ME
+              </Link>
+            </div>
+          </div>
         </div>
+
         <div className="w-full md:w-2/5 flex justify-center md:justify-end">
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden">
             <Image
@@ -31,16 +48,36 @@ export default function Home() {
 
       <section className="border-b border-border py-6">
         <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
-          BLOG
+          <Link href="/blog" className="no-underline hover:no-underline">
+            BLOG
+          </Link>
         </h2>
-        <p className="text-lg md:text-xl mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auc a preitum enim, ut volutpat urna. Ullamcorper blandit nec semper, suvinas maulis ac oditus.
-        </p>
+        
+        <div className="space-y-4 my-8">
+          {recentPosts.map((post: BlogPost) => (
+            <Link 
+              key={post.slug} 
+              href={`/blog/${post.slug}`} 
+              className="block hover:bg-background/60 transition-colors duration-200 p-3 -mx-3 rounded-md"
+            >
+              <h3 className="text-xl font-body">{post.title}</h3>
+            </Link>
+          ))}
+        </div>
+        
+        <Link 
+          href="/blog" 
+          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline"
+        >
+          VIEW ALL POSTS →
+        </Link>
       </section>
 
-      <section className="border-b border-border py-6">
+      <section className="py-6">
         <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
-          WORK
+          <Link href="/work" className="no-underline hover:no-underline">
+            WORK
+          </Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-6">
           <ProjectCard
@@ -61,20 +98,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-6">
-        <h2 className="text-3xl md:text-4xl font-serif font-normal mb-8 mt-16">
-          ABOUT ME
-        </h2>
-        <p className="text-lg md:text-xl mb-10">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auc a preitum enim, ut volutpat urna. Ullamcorper blandit nec semper, suvinas maulis ac oditus.
-        </p>
-        <Link 
-          href="/contact" 
-          className="inline-block bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-text/75 transition-colors duration-300"
-        >
-          CONTACT ME
-        </Link>
-      </section>
     </>
   );
 } 

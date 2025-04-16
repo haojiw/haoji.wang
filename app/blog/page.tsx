@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-type BlogPost = {
+export type BlogPost = {
   slug: string;
   title: string;
   date: string;
@@ -8,7 +8,7 @@ type BlogPost = {
 };
 
 // This is a placeholder. In a real implementation, you'd fetch actual blog posts.
-const DUMMY_POSTS: BlogPost[] = [
+export const DUMMY_POSTS: BlogPost[] = [
   {
     slug: 'first-post',
     title: 'My First Blog Post',
@@ -39,18 +39,25 @@ export default function BlogPage() {
         That's what I'm talking about!
       </p>
       
-      <div className="space-y-12">
+      <div className="space-y-8">
         {DUMMY_POSTS.map((post) => (
-          <article key={post.slug} className="border-b border-border pb-12">
-            <time className="block font-sans text-sm uppercase tracking-wide mb-2">
-              {post.date}
-            </time>
-            <h2 className="text-3xl md:text-4xl font-serif mb-3">
-              <Link href={`/blog/${post.slug}`} className="hover:underline">
-                {post.title}
-              </Link>
-            </h2>
-            <p className="font-serif text-lg">{post.description}</p>
+          <article 
+            key={post.slug} 
+            className="group relative border-b border-border pb-4 transition-all duration-300"
+          >
+            <div className="flex justify-between items-baseline">
+              <h4 className="text-xl md:text-2xl font-body py-2">
+                <Link href={`/blog/${post.slug}`} className="hover:no-underline block">
+                  {post.title}
+                </Link>
+              </h4>
+              <time className="font-sans text-sm uppercase tracking-wide text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {post.date}
+              </time>
+            </div>
+            <p className="font-serif text-base text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">
+              {post.description}
+            </p>
           </article>
         ))}
       </div>

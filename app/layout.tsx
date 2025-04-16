@@ -1,10 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Haoji Wang',
-  description: 'Personal website and portfolio of Haoji Wang',
+  description: 'Personal website of Haoji Wang',
 };
 
 export default function RootLayout({
@@ -14,9 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="max-w-5xl mx-auto px-4 sm:px-6 pb-24">
+      <body className="max-w-5xl mx-auto px-4 sm:px-6 pb-8">
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

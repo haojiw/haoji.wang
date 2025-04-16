@@ -47,7 +47,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       <p className="font-body mb-3 leading-relaxed" {...props} />
     ),
     a: (props: any) => (
-      <a className="underline hover:text-accent/70 transition-colors" {...props} />
+      <a className="font-body underline hover:text-accent/70 transition-colors" {...props} />
     ),
     ul: (props: any) => (
       <ul className="list-disc pl-5 mb-6 font-body" {...props} />
@@ -59,13 +59,13 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       <li className="mb-2" {...props} />
     ),
     blockquote: (props: any) => (
-      <blockquote className="border-l-4 border-text pl-4 italic my-6" {...props} />
+      <blockquote className="border-l-4 border-text pl-4 font-body italic my-6" {...props} />
     ),
     code: (props: any) => (
-      <code className="font-mono bg-gray-100 px-1 py-0.5 rounded" {...props} />
+      <code className="font-mono text-sm bg-[#F0EDE5] px-1 py-0.5 rounded" {...props} />
     ),
     pre: (props: any) => (
-      <pre className="font-mono bg-gray-100 p-4 rounded-md overflow-auto my-6" {...props} />
+      <pre className="font-mono text-sm bg-[#F0EDE5] p-4 rounded-md overflow-auto my-6" {...props} />
     ),
   };
 
