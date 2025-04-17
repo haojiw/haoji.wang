@@ -3,7 +3,7 @@ import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
 
 // Importing the blog post data
-import { DUMMY_POSTS, type BlogPost } from './blog/data';
+import { BLOG_POSTS, type BlogPost } from './blog/data';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
@@ -16,7 +16,7 @@ function formatDate(date: Date): string {
 
 export default function Home() {
   // Get the 3 most recent blog posts (they're already sorted in the data.ts file)
-  const recentPosts = DUMMY_POSTS.slice(0, 3);
+  const recentPosts = BLOG_POSTS.slice(0, 3);
 
   return (
     <>

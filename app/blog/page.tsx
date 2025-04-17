@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { DUMMY_POSTS } from './data';
+import { BLOG_POSTS } from './data';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
@@ -21,7 +21,7 @@ export default function BlogPage() {
       </p>
       
       <div className="space-y-8">
-        {DUMMY_POSTS.map((post) => (
+        {BLOG_POSTS.map((post) => (
           <article 
             key={post.slug} 
             className="group relative border-b border-border pb-4 transition-all duration-300"
@@ -36,7 +36,7 @@ export default function BlogPage() {
                 {formatDate(post.date)}
               </time>
             </div>
-            <p className="font-serif text-lg text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">
+            <p className="font-body text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">
               {post.description}
             </p>
           </article>
