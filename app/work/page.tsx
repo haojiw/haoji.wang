@@ -8,7 +8,7 @@ const PROJECTS = [
     slug: 'project-one',
   },
   {
-    title: 'Project Two',
+    title: 'Sifu Chatbot',
     description: 'A short description of the project',
     slug: 'project-two',
   },

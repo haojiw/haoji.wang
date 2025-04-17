@@ -9,7 +9,7 @@ const nextConfig = {
   },
   // Configure any experimental features if needed
   experimental: {
-    appDir: true,
+    
   },
 };
 

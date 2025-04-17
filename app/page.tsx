@@ -42,14 +42,13 @@ export default function Home() {
         </div>
 
         <div className="w-full md:w-2/5 flex justify-center md:justify-end">
-          <div className="relative overflow-hidden">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 overflow-hidden">
             <Image
               src="/profile.webp"
               alt="Haoji Wang"
-              width={320}
-              height={320}
-              sizes="(max-width: 768px) 256px, 320px"
-              className="object-cover rounded-full"
+              fill
+              sizes="(max-width: 768px) 50vw, 320px"
+              className="rounded-full object-cover"
               quality={100}
               priority
             />

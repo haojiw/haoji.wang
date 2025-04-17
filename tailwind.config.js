@@ -20,6 +20,7 @@ module.exports = {
         body: ['Lora', 'serif'],
         serif2: ['Cormorant Garamond', 'serif'],
         sans2: ['Space Grotesk', 'sans-serif'],
+        handwriting: ['Indie Flower', 'serif'],
       },
       borderWidth: {
         DEFAULT: '1px',
