@@ -33,7 +33,10 @@ export default function BlogPage() {
                 </Link>
               </h4>
               <time className="font-sans uppercase tracking-wide text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {formatDate(post.date)}
+                {/* Mobile: MM/DD */}
+                <span className="block md:hidden">{new Date(post.date).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit" })}</span>
+                {/* Desktop: MMM DD, YYYY */}
+                <span className="hidden md:block">{formatDate(post.date)}</span>
               </time>
             </div>
             <p className="font-body text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">

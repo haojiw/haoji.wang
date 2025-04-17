@@ -199,7 +199,7 @@ const ScrapbookSection = () => {
               {/* Fact bubble */}
               {isActive && (
                 <div
-                  className="absolute w-60 p-4 rounded-xl text-sm leading-snug font-body
+                  className="absolute w-60 p-4 rounded-xl text-sm leading-snug font-body text-text
                              bg-white/90 backdrop-blur-sm shadow-xl pointer-events-none"
                   style={tooltipStyle}
                 >

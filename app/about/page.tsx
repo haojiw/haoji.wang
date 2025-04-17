@@ -31,7 +31,7 @@ export default function AboutPage() {
         </div>
         <div className="relative h-80 md:h-auto">
           <Image
-            src="/about.jpg"
+            src="/about.webp"
             alt="About me"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"

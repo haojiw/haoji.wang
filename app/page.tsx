@@ -42,13 +42,15 @@ export default function Home() {
         </div>
 
         <div className="w-full md:w-2/5 flex justify-center md:justify-end">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden">
+          <div className="relative overflow-hidden">
             <Image
-              src="/profile3.jpg"
+              src="/profile.webp"
               alt="Haoji Wang"
-              fill
-              sizes="(max-width: 768px) 16rem, 20rem"
-              className="object-cover"
+              width={320}
+              height={320}
+              sizes="(max-width: 768px) 256px, 320px"
+              className="object-cover rounded-full"
+              quality={100}
               priority
             />
           </div>
@@ -71,9 +73,6 @@ export default function Home() {
             >
               <div className="flex justify-between items-baseline">
                 <h3 className="text-xl font-body">{post.title}</h3>
-                <time className="font-sans uppercase tracking-wide text-muted text-sm">
-                  {formatDate(post.date)}
-                </time>
               </div>
             </Link>
           ))}
