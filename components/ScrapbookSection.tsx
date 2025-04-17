@@ -1,125 +1,194 @@
 "use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState } from "react";
 
-// Define the sticker type
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
 type Sticker = {
   id: number;
-  alt: string;
+  label: string;
   color: string;
-  position: {
-    top: string;
-    left: string;
-    rotate: string;
-  };
+  top: string;   // % string e.g. "40%"
+  left: string;  // % string e.g. "65%"
+  rotate: string; // css rotate() string
   fact: string;
 };
 
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 const ScrapbookSection = () => {
-  const [activeSticker, setActiveSticker] = useState<number | null>(null);
-  
-  // Define stickers with positions, rotations, and fun facts
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  /* --------------------------------------- */
+  /*  Sticker data                            */
+  /* --------------------------------------- */
   const stickers: Sticker[] = [
     {
       id: 1,
-      alt: 'Coffee',
-      color: '#BF9270',
-      position: { top: '10%', left: '20%', rotate: 'rotate(-5deg)' },
-      fact: "I'm a total coffee enthusiast and have visited over 200 coffee shops around the world!"
+      label: "Lexus",
+      color: "#BF9270",
+      top: "10%",
+      left: "20%",
+      rotate: "rotate(-5deg)",
+      fact:
+        "I drive a 2005 Lexus LS430. Yes my car is 20 years old. Yes it's perfect for me. Yes I'll drive it till it breaks.",
     },
     {
       id: 2,
-      alt: 'Guitar',
-      color: '#7D8E95',
-      position: { top: '35%', left: '65%', rotate: 'rotate(8deg)' },
-      fact: "I taught myself to play guitar and can play over 50 songs by ear."
+      label: "Guitar",
+      color: "#7D8E95",
+      top: "35%",
+      left: "65%",
+      rotate: "rotate(8deg)",
+      fact:
+        "I play guitar and record song covers sometimes. I got some friends who love to come over for Mandopop karaoke.",
     },
     {
       id: 3,
-      alt: 'Camera',
-      color: '#D3AB9E',
-      position: { top: '60%', left: '25%', rotate: 'rotate(-10deg)' },
-      fact: "Photography is my creative outlet. I've had two of my photos published in travel magazines!"
+      label: "Cooking",
+      color: "#D3AB9E",
+      top: "60%",
+      left: "25%",
+      rotate: "rotate(-10deg)",
+      fact:
+        "I run a food Instagram account. When everything's over I want to open a seafood restaurant. Who wants sushi?",
     },
     {
       id: 4,
-      alt: 'Book',
-      color: '#6A8D73',
-      position: { top: '15%', left: '75%', rotate: 'rotate(5deg)' },
-      fact: "I read over 30 books a year, with a special love for science fiction and philosophy."
+      label: "Album",
+      color: "#6A8D73",
+      top: "15%",
+      left: "75%",
+      rotate: "rotate(5deg)",
+      fact:
+        "The College Dropout is my favourite album. I'm also into Kendrick Lamar, Tyler the Creator, and some R&B.",
     },
     {
       id: 5,
-      alt: 'Plane',
-      color: '#A4C3B2',
-      position: { top: '70%', left: '70%', rotate: 'rotate(-7deg)' },
-      fact: "I've visited 18 countries so far, with a goal to reach 50 by the time I'm 40."
+      label: "Soccer",
+      color: "#A4C3B2",
+      top: "70%",
+      left: "70%",
+      rotate: "rotate(-7deg)",
+      fact:
+        "Huge soccer / NBA nerd. I won the NBA trivia at Bruin Sports Analytics, and I love talking about soccer tactics.",
+    },
+    {
+      id: 6,
+      label: "Games",
+      color: "#8D9EAB",
+      top: "40%",
+      left: "40%",
+      rotate: "rotate(10deg)",
+      fact:
+        "Best games I've played: RDR 2, Zelda BOTW, Black Myth Wukong. But I grew up playing NBA 2K and Football Manager.",
+    },
+    {
+      id: 7,
+      label: "Globe",
+      color: "#E3B5A4",
+      top: "25%",
+      left: "10%",
+      rotate: "rotate(6deg)",
+      fact:
+        "I'm mostly rotating between Zhejiang, Singapore, and California. Still reminiscing my time in Tokyo and Thailand.",
+    },
+    {
+      id: 8,
+      label: "Books",
+      color: "#B8D8BA",
+      top: "55%",
+      left: "55%",
+      rotate: "rotate(-8deg)",
+      fact:
+        "Love juggling one fiction & one non-fiction. Recently on The Alchemist and The Subtle Art of Not Giving an F.",
+    },
+    {
+      id: 9,
+      label: "Math",
+      color: "#AA8976",
+      top: "80%",
+      left: "15%",
+      rotate: "rotate(12deg)",
+      fact:
+        "I was 18th in Singapore Math Olympiad, and math club president in high school. Haven't grinded math the same way since.",
+    },
+    {
+      id: 10,
+      label: "Films",
+      color: "#9BADB7",
+      top: "20%",
+      left: "45%",
+      rotate: "rotate(-4deg)",
+      fact:
+        "These days we all watch a lot of movies. My recent favs are Django Unchained, The Great Gatsby, and The Dark Knight.",
     },
   ];
 
+  /* ---------------------------------------------------------------- */
+  /*  Render                                                          */
+  /* ---------------------------------------------------------------- */
   return (
-    <div className="mt-16 mb-24">
-      <h3 className="text-2xl md:text-3xl font-serif mb-8">Bits & Pieces</h3>
-      
-      <div className="relative h-[500px] bg-[#f5f0e5] rounded-lg p-6 shadow-md">
-        {/* Scrapbook paper texture */}
-        <div className="absolute inset-0 bg-[#f9f6f0] opacity-70 mix-blend-overlay rounded-lg"></div>
-        
+    <section className="mt-16 mb-24">
+      <h3 className="text-2xl md:text-3xl font-serif mb-8">Bits &amp; Pieces</h3>
+
+      <div className="relative h-[500px] rounded-lg bg-[#f5f0e5] p-6 shadow-md">
+        {/* Paper texture overlay */}
+        <div className="absolute inset-0 bg-[#f9f6f0] opacity-70 mix-blend-overlay rounded-lg pointer-events-none" />
+
         {/* Decorative tape strips */}
-        <div className="absolute top-0 left-[20%] w-[100px] h-[30px] bg-[#9DBEBB] opacity-40 rounded-sm transform -rotate-6"></div>
-        <div className="absolute bottom-[10%] right-[15%] w-[80px] h-[25px] bg-[#D8B4A0] opacity-40 rounded-sm transform rotate-12"></div>
-        
+        <div className="absolute top-0 left-[20%] w-[100px] h-[30px] bg-[#9DBEBB] opacity-40 rounded-sm -rotate-6 pointer-events-none" />
+        <div className="absolute bottom-[10%] right-[15%] w-[80px] h-[25px] bg-[#D8B4A0] opacity-40 rounded-sm rotate-12 pointer-events-none" />
+
         {/* Stickers */}
-        {stickers.map((sticker) => (
-          <div 
-            key={sticker.id}
-            className="absolute w-20 h-20 transform cursor-pointer transition-transform duration-300 hover:scale-110"
-            style={{ 
-              top: sticker.position.top, 
-              left: sticker.position.left, 
-              transform: sticker.position.rotate 
-            }}
-            onMouseEnter={() => setActiveSticker(sticker.id)}
-            onMouseLeave={() => setActiveSticker(null)}
-          >
-            {/* Placeholder sticker circles */}
-            <div className="relative w-full h-full">
-              <div 
-                className="absolute inset-0 rounded-full shadow-md overflow-hidden flex items-center justify-center"
-                style={{ backgroundColor: sticker.color }}
+        {stickers.map((s) => {
+          const isActive = hoveredId === s.id;
+
+          return (
+            <div
+              key={s.id}
+              style={{ top: s.top, left: s.left }}
+              className={`absolute cursor-pointer transition-transform duration-300 ${
+                isActive ? "z-50 scale-110" : "z-10"
+              }`}
+              onMouseEnter={() => setHoveredId(s.id)}
+              onMouseLeave={() => setHoveredId(null)}
+            >
+              {/* circle (rotated‐inside so wrapper keeps flat stacking context) */}
+              <div
+                className="w-20 h-20 rounded-full shadow-md flex items-center justify-center"
+                style={{ backgroundColor: s.color, transform: s.rotate }}
               >
-                <span className="text-white font-bold text-sm">
-                  {sticker.alt}
+                <span className="text-white font-bold text-sm select-none">
+                  {s.label}
                 </span>
               </div>
-            </div>
-            
-            {/* Fact bubble that appears on hover */}
-            {activeSticker === sticker.id && (
-              <div className="absolute w-48 p-3 bg-white rounded-lg shadow-lg z-10 text-sm leading-snug"
-                style={{
-                  top: sticker.position.top < '50%' ? '105%' : 'auto',
-                  bottom: sticker.position.top >= '50%' ? '105%' : 'auto',
-                  left: sticker.position.left < '50%' ? '0' : 'auto',
-                  right: sticker.position.left >= '50%' ? '0' : 'auto',
-                  transformOrigin: `${sticker.position.top < '50%' ? 'top' : 'bottom'} ${sticker.position.left < '50%' ? 'left' : 'right'}`
-                }}
-              >
-                <div className="font-body">
-                  {sticker.fact}
+
+              {/* Fact bubble */}
+              {isActive && (
+                <div
+                  className="absolute w-56 p-4 bg-white rounded-xl shadow-xl text-sm leading-snug pointer-events-none"
+                  style={{
+                    top: "calc(100% + 8px)",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                  }}
+                >
+                  {s.fact}
                 </div>
-              </div>
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          );
+        })}
       </div>
-      
+
       <p className="text-center font-serif text-sm text-muted mt-4">
-        Hover over the stickers to learn fun facts about me
+        Hover over the stickers to learn fun facts about me
       </p>
-    </div>
+    </section>
   );
 };
 
-export default ScrapbookSection; 
+export default ScrapbookSection;

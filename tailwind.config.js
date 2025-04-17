@@ -7,10 +7,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#FAF8F2',
-        text: '#2F2F2F',  //#2F2F2F
+        bg: '#FAF8F2',
+        text: '#2F2F2F',
         muted: '#8A8A7C',
-        accent: '#3F4B3B',
+        accent: '#3F4B3B', //273b09
+        brand: '#617129',
         border: '#dcd6cc',
       },
       fontFamily: {

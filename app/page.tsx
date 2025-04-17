@@ -5,8 +5,17 @@ import Link from 'next/link';
 // Importing the blog post data
 import { DUMMY_POSTS, type BlogPost } from './blog/data';
 
+// Format date as MMM DD, YYYY
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric'
+  });
+}
+
 export default function Home() {
-  // Get the first 3 blog posts
+  // Get the 3 most recent blog posts (they're already sorted in the data.ts file)
   const recentPosts = DUMMY_POSTS.slice(0, 3);
 
   return (
@@ -21,12 +30,12 @@ export default function Home() {
               This site is a bit like me: <br />
               Still in progress, but you'll want to check back later.
             </p>
-            <div className="flex justify-end">
+            <div className="flex md:justify-end justify-start mb-8 md:mb-0">
               <Link 
                 href="/about" 
-                className="bg-accent text-background py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300"
+                className="bg-accent text-bg py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300"
               >
-                Who's this guy?
+                Who's this?
               </Link>
             </div>
           </div>
@@ -58,9 +67,14 @@ export default function Home() {
             <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`} 
-              className="block hover:bg-background/60 transition-colors duration-200 p-3 -mx-3 rounded-md"
+              className="block hover:bg-bg/60 transition-colors duration-200 p-3 -mx-3 rounded-md"
             >
-              <h3 className="text-xl font-body">{post.title}</h3>
+              <div className="flex justify-between items-baseline">
+                <h3 className="text-xl font-body">{post.title}</h3>
+                <time className="font-sans uppercase tracking-wide text-muted text-sm">
+                  {formatDate(post.date)}
+                </time>
+              </div>
             </Link>
           ))}
         </div>

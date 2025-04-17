@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { DUMMY_POSTS } from './data';
 
+// Format date as MMM DD, YYYY
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric'
+  });
+}
+
 export default function BlogPage() {
   return (
     <div className="py-16">
@@ -24,7 +33,7 @@ export default function BlogPage() {
                 </Link>
               </h4>
               <time className="font-sans uppercase tracking-wide text-muted opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                {post.date}
+                {formatDate(post.date)}
               </time>
             </div>
             <p className="font-serif text-lg text-muted max-h-0 overflow-hidden group-hover:max-h-20 transition-all duration-300 ease-in-out">

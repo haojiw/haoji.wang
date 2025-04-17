@@ -1,28 +1,42 @@
 export type BlogPost = {
   slug: string;
   title: string;
-  date: string;
+  date: Date;
   description: string;
 };
 
-// This is a placeholder. In a real implementation, you'd fetch actual blog posts.
-export const DUMMY_POSTS: BlogPost[] = [
-  {
-    slug: 'first-post',
-    title: 'My First Blog Post',
-    date: 'JAN 1, 2023',
-    description: 'An introduction to my blog and what to expect.',
-  },
-  {
-    slug: 'second-post',
-    title: 'Reflections on Web Development',
-    date: 'FEB 15, 2023',
-    description: 'Thoughts on modern web development practices and tools.',
-  },
-  {
-    slug: 'third-post',
-    title: 'Design Systems and Their Importance',
-    date: 'MAR 30, 2023',
-    description: 'Why every project should use a design system and how to create one.',
-  },
-]; 
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+
+// Load blog posts from the content/blog directory
+export function getBlogPosts(): BlogPost[] {
+  const blogDir = path.join(process.cwd(), 'content/blog');
+  const files = fs.readdirSync(blogDir);
+  
+  const posts = files
+    .filter((file) => file.endsWith('.mdx'))
+    .map((file) => {
+      const slug = file.replace(/\.mdx$/, '');
+      const filePath = path.join(blogDir, file);
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      const { data } = matter(fileContent);
+      
+      // Parse the date string to a Date object
+      const dateStr = data.date as string;
+      const date = new Date(dateStr);
+      
+      return {
+        slug,
+        title: data.title as string,
+        date,
+        description: data.description as string,
+      };
+    })
+    .sort((a, b) => b.date.getTime() - a.date.getTime()); // Sort by date, newest first
+  
+  return posts;
+}
+
+// Get all blog posts
+export const DUMMY_POSTS: BlogPost[] = getBlogPosts(); 

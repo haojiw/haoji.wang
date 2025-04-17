@@ -11,6 +11,16 @@ type Frontmatter = {
   description: string;
 };
 
+// Format date as MMM DD, YYYY
+function formatDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
 // Component for the blog post layout
 export default async function BlogPost({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -44,7 +54,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       <h4 className="text-xl md:text-2xl font-serif mt-6 mb-4" {...props} />
     ),
     p: (props: any) => (
-      <p className="font-body mb-3 leading-relaxed" {...props} />
+      <p className="font-body mb-6 leading-relaxed" {...props} />
     ),
     a: (props: any) => (
       <a className="font-body underline hover:text-accent/70 transition-colors" {...props} />
@@ -73,7 +83,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     <article className="max-w-3xl mx-auto pt-16 pb-24">
       <div className="mb-8 pb-8">
         <time className="block font-sans text-sm uppercase tracking-wide text-muted mb-4">
-          {data.date}
+          {formatDate(data.date)}
         </time>
         <h1 className="text-4xl md:text-5xl font-serif text-accent mb-6">
           {data.title}
