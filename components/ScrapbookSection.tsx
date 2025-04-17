@@ -1,193 +1,148 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
-/* ------------------------------------------------------------------ */
-/*  Types                                                              */
-/* ------------------------------------------------------------------ */
 type Sticker = {
   id: number;
   label: string;
-  color: string;
-  top: string;   // % string e.g. "40%"
-  left: string;  // % string e.g. "65%"
-  rotate: string; // css rotate() string
+  imageSrc: string;
+  rotate: string;
   fact: string;
 };
 
-/* ------------------------------------------------------------------ */
-/*  Component                                                          */
-/* ------------------------------------------------------------------ */
 const ScrapbookSection = () => {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
-  /* --------------------------------------- */
-  /*  Sticker data                            */
-  /* --------------------------------------- */
   const stickers: Sticker[] = [
-    // --- Row 1 ---
     {
       id: 1,
       label: "Lexus",
-      color: "#BF9270",
-      top: "10%",
-      left: "12%",
+      imageSrc: "/stickers/lexus.webp",
       rotate: "rotate(-6deg)",
-      fact:
-        "I drive a 2005 Lexus LS430. Yes my car is 20 years old. Yes it's perfect for me. Yes I'll drive it till it breaks.",
+      fact: "I drive a 2005 Lexus LS430. Yes my car is 20 years old. Yes it's perfect for me. Yes I'll drive it till it breaks.",
+    },
+    {
+      id: 12,
+      label: "Teenage",
+      imageSrc: "/stickers/teenage.webp",
+      rotate: "rotate(2deg)",
+      fact: "At 15, I received a full scholarship from the Singapore government and moved abroad alone. Four years away from home taught me everything about independence.",
     },
     {
       id: 10,
       label: "Films",
-      color: "#9BADB7",
-      top: "8%",
-      left: "45%",
+      imageSrc: "/stickers/films.webp",
       rotate: "rotate(-4deg)",
-      fact:
-        "These days we all watch a lot of movies. My recent favs are Django Unchained, The Great Gatsby, and The Dark Knight.",
+      fact: "These days we all watch a lot of movies. My recent favs are Django Unchained, The Great Gatsby, and The Dark Knight.",
     },
     {
       id: 4,
       label: "Album",
-      color: "#6A8D73",
-      top: "12%",
-      left: "78%",
+      imageSrc: "/stickers/album.webp",
       rotate: "rotate(5deg)",
-      fact:
-        "The College Dropout is my favourite album. I'm also into Kendrick Lamar, Tyler the Creator, and some R&B.",
+      fact: "The College Dropout is my favourite album. I'm also into Kendrick Lamar, Tyler the Creator, and some R&B.",
     },
-
-    // --- Row 2 ---
     {
       id: 7,
       label: "Globe",
-      color: "#E3B5A4",
-      top: "37%",
-      left: "10%",
+      imageSrc: "/stickers/globe.webp",
       rotate: "rotate(4deg)",
-      fact:
-        "I'm mostly rotating between Zhejiang, Singapore, and California. Still reminiscing my time in Tokyo and Thailand.",
+      fact: "I'm mostly rotating between Zhejiang, Singapore, and California. Still reminiscing my time in Tokyo and Thailand.",
     },
     {
       id: 6,
       label: "Games",
-      color: "#8197AB",
-      top: "36%",
-      left: "35%",
+      imageSrc: "/stickers/games.webp",
       rotate: "rotate(-2deg)",
-      fact:
-        "Best games I've played: RDR 2, Zelda BOTW, Black Myth Wukong. But I grew up playing NBA 2K and Football Manager.",
+      fact: "Best games I've played: RDR2, Zelda BOTW, Black Myth Wukong. I grew up playing NBA 2K and Football Manager.",
     },
     {
       id: 2,
       label: "Guitar",
-      color: "#7D8E95",
-      top: "38%",
-      left: "60%",
+      imageSrc: "/stickers/guitar.webp",
       rotate: "rotate(8deg)",
-      fact:
-        "I play guitar and record song covers sometimes. I got some friends who love to come over for Mandopop karaoke.",
+      fact: "I play guitar and record song covers sometimes. I got some friends who love to come over for Mandopop karaoke.",
     },
     {
       id: 5,
-      label: "Soccer",
-      color: "#A4C3B2",
-      top: "37%",
-      left: "85%",
+      label: "Sports",
+      imageSrc: "/stickers/sports.webp",
       rotate: "rotate(-7deg)",
-      fact:
-        "Huge soccer / NBA nerd. I won the NBA trivia at Bruin Sports Analytics, and I love talking about soccer tactics.",
+      fact: "Huge soccer / NBA nerd. I won the NBA trivia at Bruin Sports Analytics, and I love talking about soccer tactics.",
     },
-
-    // --- Row 3 ---
     {
       id: 3,
       label: "Cooking",
-      color: "#D3AB9E",
-      top: "67%",
-      left: "12%",
+      imageSrc: "/stickers/cooking.webp",
       rotate: "rotate(-10deg)",
-      fact:
-        "I run a food Instagram account. When everything's over I want to open a seafood restaurant. Who wants sushi?",
+      fact: "I run a food Instagram account. When everything's over I want to open a seafood restaurant. Who wants sushi?",
     },
     {
       id: 8,
       label: "Books",
-      color: "#B8D8BA",
-      top: "65%",
-      left: "35%",
+      imageSrc: "/stickers/books.webp",
       rotate: "rotate(-8deg)",
-      fact:
-        "Love juggling one fiction & one non-fiction. Recently on The Alchemist and The Subtle Art of Not Giving an F.",
+      fact: "Love juggling one fiction & one non‑fiction. Recently on The Alchemist and The Subtle Art of Not Giving an F.",
     },
     {
       id: 9,
       label: "Math",
-      color: "#AA8976",
-      top: "70%",
-      left: "58%",
+      imageSrc: "/stickers/math.webp",
       rotate: "rotate(12deg)",
-      fact:
-        "I was 18th in Singapore Math Olympiad, and math club president in high school. Haven't grinded math the same way since.",
+      fact: "I was 18th in Singapore Math Olympiad, and math club president in high school. Haven't grinded math the same way since.",
     },
     {
       id: 11,
       label: "Faith",
-      color: "#D3AB9E",
-      top: "69%",
-      left: "82%",
+      imageSrc: "/stickers/faith.webp",
       rotate: "rotate(3deg)",
       fact: "I grew up in a Christian household and I got baptized recently. Faith keeps my ego in check and reminds me what truly matters.",
     },
   ];
 
-  /* ---------------------------------------------------------------- */
-  /*  Render                                                          */
-  /* ---------------------------------------------------------------- */
   return (
     <section className="mt-16 mb-24">
-      <h3 className="text-2xl md:text-3xl font-serif mb-8">Bits &amp; Pieces</h3>
+      <h3 className="text-2xl md:text-3xl font-serif mb-8 text-center">
+        Stickers Board
+      </h3>
 
-      <div className="relative h-[500px] rounded-lg bg-[#f5f0e5] p-6 shadow-md">
-        {/* Paper texture overlay */}
-        <div className="absolute inset-0 bg-[#f9f6f0] opacity-70 mix-blend-overlay rounded-lg pointer-events-none" />
-
-        {/* Decorative tape strips */}
-        <div className="absolute top-0 left-[20%] w-[100px] h-[30px] bg-[#9DBEBB] opacity-40 rounded-sm -rotate-6 pointer-events-none" />
-        <div className="absolute bottom-[10%] right-[15%] w-[80px] h-[25px] bg-[#D8B4A0] opacity-40 rounded-sm rotate-12 pointer-events-none" />
-
-        {/* Stickers */}
+      {/* GRID: 3 cols on small/med → 4 cols on lg+, rows fill automatically */}
+      <div className="grid grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 px-4 place-items-center">
         {stickers.map((s) => {
           const isActive = hoveredId === s.id;
 
           return (
             <div
               key={s.id}
-              style={{ top: s.top, left: s.left }}
-              className={`absolute cursor-pointer transition-transform duration-300 ${
+              className={`relative transition-transform duration-300 ${
                 isActive ? "z-50 scale-110" : "z-10"
-              }`}
+              } cursor-pointer`}
               onMouseEnter={() => setHoveredId(s.id)}
               onMouseLeave={() => setHoveredId(null)}
+              style={{ transform: s.rotate }}
             >
-              {/* circle */}
-              <div
-                className="w-20 h-20 rounded-full shadow-md flex items-center justify-center"
-                style={{ backgroundColor: s.color, transform: s.rotate }}
-              >
-                <span className="text-white font-sans2 font-bold text-sm select-none">
-                  {s.label}
-                </span>
+              {/* Sticker image */}
+              <div className="w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 flex items-center justify-center">
+                <Image
+                  src={s.imageSrc}
+                  alt={s.label}
+                  width={160}
+                  height={160}
+                  loading="lazy"
+                  className="select-none pointer-events-none"
+                />
               </div>
 
               {/* Fact bubble */}
               {isActive && (
                 <div
-                  className="absolute w-56 p-4 bg-white rounded-xl shadow-xl font-body text-sm leading-snug pointer-events-none"
+                  className="absolute w-60 p-4 rounded-xl text-sm leading-snug font-body
+                             bg-white/90 backdrop-blur-sm shadow-xl pointer-events-none"
                   style={{
-                    top: "calc(100% + 8px)",
+                    top: "100%",
                     left: "50%",
-                    transform: "translateX(-50%)",
+                    transform: "translate(-50%, 12px)",
                   }}
                 >
                   {s.fact}
@@ -198,7 +153,7 @@ const ScrapbookSection = () => {
         })}
       </div>
 
-      <p className="text-center font-sans2 text-sm text-muted mt-4">
+      <p className="text-center font-sans2 text-sm text-muted mt-6">
         Hover over the stickers to learn fun facts about me!
       </p>
     </section>
