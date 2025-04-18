@@ -40,6 +40,6 @@ export const PROJECTS: Project[] = [
     title: 'Business Plan Competitions',
     description: 'My experiences with Uphealth, GoldenAge.AI, and Startup Labs UCLA',
     slug: 'business-plans',
-    github: 'https://github.com/onehodge/Business-Plan-Competitions',
+    github: '',
   },
 ]; 

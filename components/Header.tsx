@@ -1,35 +1,48 @@
 "use client";
 
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
+  const [isShrunk, setIsShrunk] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const navRef = useRef<HTMLDivElement>(null);
 
-  // Handle scroll events
+  // Scroll → decide once, with hysteresis
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const SHRINK_AT = 60;  // scrollY where we shrink
+    const GROW_AT   = 10;  // scrollY where we grow back
 
-  // Handle click outside
+    const onScroll = () => {
+      const y = window.scrollY;
+
+      if (!isShrunk && y > SHRINK_AT)   setIsShrunk(true);
+      if ( isShrunk && y < GROW_AT)     setIsShrunk(false);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isShrunk]);
+
+  // Close drawer on outside click
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+    const onClick = (e: MouseEvent) => {
+      if (isOpen && navRef.current && !navRef.current.contains(e.target as Node)) {
         setIsOpen(false);
       }
     };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
   }, [isOpen]);
 
   return (
-    <header className={`py-8 md:py-12 sticky top-0 z-50 bg-bg/90 backdrop-blur-sm transition-all duration-300 ${scrollY > 20 ? 'py-4 md:py-6' : ''}`}>
+    <header
+      className={`
+        sticky top-0 z-50 bg-bg/90 backdrop-blur-sm transition-all duration-300
+        ${isShrunk ? "py-4 md:py-6" : "py-8 md:py-12"}
+      `}
+    >
       <nav className="flex items-center justify-between relative" ref={navRef}>
         <div className="text-xl md:text-xl font-body font-bold px-2">
           <Link href="/" className="no-underline hover:no-underline text-accent">
