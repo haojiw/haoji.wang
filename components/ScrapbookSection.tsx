@@ -163,7 +163,7 @@ const ScrapbookSection = () => {
   ];
 
   return (
-    <section className="mt-16 mb-24">
+    <section className="mt-16 mb-16">
       <div className="flex justify-center mb-12">
         <div className="
           inline-block px-6 py-3 

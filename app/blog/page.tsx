@@ -17,7 +17,7 @@ export default function BlogPage() {
         BLOG
       </h2>
       <p className="font-body text-lg mb-12">
-        That's what I'm talking about!
+        I write
       </p>
       
       <div className="space-y-8">

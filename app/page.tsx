@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 // Importing the blog post data
 import { BLOG_POSTS, type BlogPost } from './blog/data';
+// Import projects from work page
+import { PROJECTS, type Project } from './work/page';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
@@ -17,6 +19,8 @@ function formatDate(date: Date): string {
 export default function Home() {
   // Get the 3 most recent blog posts (they're already sorted in the data.ts file)
   const recentPosts = BLOG_POSTS.slice(0, 3);
+  // Get the first 3 projects
+  const featuredProjects = PROJECTS.slice(0, 3);
 
   return (
     <>
@@ -92,22 +96,23 @@ export default function Home() {
           </Link>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-6">
-          <ProjectCard
-            title="Project One"
-            description="A short description of the project"
-            slug="project-one"
-          />
-          <ProjectCard
-            title="Project Two"
-            description="A short description of the project"
-            slug="project-two"
-          />
-          <ProjectCard
-            title="Project Three"
-            description="A short description of the project"
-            slug="project-three"
-          />
+          {featuredProjects.map((project: Project) => (
+            <ProjectCard
+              key={project.slug}
+              title={project.title}
+              description={project.description}
+              slug={project.slug}
+              github={project.github}
+            />
+          ))}
         </div>
+        
+        <Link 
+          href="/work" 
+          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline"
+        >
+          VIEW ALL PROJECTS →
+        </Link>
       </section>
 
     </>

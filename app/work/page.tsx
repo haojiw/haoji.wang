@@ -1,36 +1,48 @@
 import ProjectCard from '@/components/ProjectCard';
 
-// This is a placeholder. In a real implementation, you'd fetch actual projects.
-const PROJECTS = [
+export type Project = {
+  title: string;
+  description: string;
+  slug: string;
+  github: string;
+};
+
+export const PROJECTS: Project[] = [
   {
-    title: 'Project One',
-    description: 'A short description of the project',
-    slug: 'project-one',
+    title: 'Sifu Wellness Chatbot',
+    description: 'A customized GPT that gives you life advice, like Master Oogway',
+    slug: 'sifu',
+    github: 'https://chatgpt.com/g/g-679a7291fe388191962bc6f2080a0e00-sifu',
   },
   {
-    title: 'Sifu Chatbot',
-    description: 'A short description of the project',
-    slug: 'project-two',
+    title: 'Gmail Inbox Summarizer',
+    description: 'An AI-powered Gmail add-on that summarizes your daily emails',
+    slug: 'gmail-summarizer',
+    github: 'https://github.com/onehodge/email-summary',
   },
   {
-    title: 'Project Three',
-    description: 'A short description of the project',
-    slug: 'project-three',
+    title: 'WhatsBruin Website',
+    description: 'Tell us what you like to eat at UCLA, and get notified when they are served!',
+    slug: 'whats-bruin',
+    github: 'https://www.whats-bruin.com/',
   },
   {
-    title: 'Project Four',
-    description: 'A short description of the project',
-    slug: 'project-four',
+    title: 'Sports Analytics Articles',
+    description: 'Home Advantage in the UCL, and Finding the next Sergio Busquets',
+    slug: 'bsa-articles',
+    github: 'https://github.com/onehodge/BSA-Data-Projects',
   },
   {
-    title: 'Project Five',
-    description: 'A short description of the project',
-    slug: 'project-five',
+    title: 'Machine Learning Projects',
+    description: 'Predicting World Happiness, AirBnb Superhosts, and Handwritten Digits',
+    slug: 'ml-projects',
+    github: 'https://github.com/onehodge/World-Happiness-Report-Predictor',
   },
   {
-    title: 'Project Six',
-    description: 'A short description of the project',
-    slug: 'project-six',
+    title: 'Business Plan Competitions',
+    description: 'My experiences with Uphealth, GoldenAge.AI, and Startup Labs UCLA',
+    slug: 'business-plans',
+    github: 'https://github.com/onehodge/Business-Plan-Competitions',
   },
 ];
 
@@ -41,7 +53,7 @@ export default function ProjectsPage() {
         WORK
       </h2>
       <p className="font-body text-lg mb-12">
-        Things I've built.
+        Some things I've worked on
       </p>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -51,6 +63,7 @@ export default function ProjectsPage() {
             title={project.title}
             description={project.description}
             slug={project.slug}
+            github={project.github}
           />
         ))}
       </div>
