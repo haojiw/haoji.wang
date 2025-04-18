@@ -39,4 +39,4 @@ export function getBlogPosts(): BlogPost[] {
 }
 
 // Get all blog posts
-export const BLOG_POSTS: BlogPost[] = getBlogPosts(); 
+export const BLOGPOSTS: BlogPost[] = getBlogPosts(); 

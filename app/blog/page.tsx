@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { BLOG_POSTS } from './data';
+import { BLOGPOSTS } from '../../lib/blogposts';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
@@ -21,7 +21,7 @@ export default function BlogPage() {
       </p>
       
       <div className="space-y-8">
-        {BLOG_POSTS.map((post) => (
+        {BLOGPOSTS.map((post) => (
           <article 
             key={post.slug} 
             className="group relative border-b border-border pb-4 transition-all duration-300"

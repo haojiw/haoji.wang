@@ -4,9 +4,9 @@ import Link from 'next/link';
 import PageTransition from '@/components/PageTransition';
 
 // Importing the blog post data
-import { BLOG_POSTS, type BlogPost } from './blog/data';
+import { BLOGPOSTS, type BlogPost } from '../lib/blogposts';
 // Import projects from work page
-import { PROJECTS, type Project } from './work/data';
+import { PROJECTS, type Project } from '../lib/projects';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
@@ -19,7 +19,7 @@ function formatDate(date: Date): string {
 
 export default function Home() {
   // Get the 3 most recent blog posts (they're already sorted in the data.ts file)
-  const recentPosts = BLOG_POSTS.slice(0, 3);
+  const recentPosts = BLOGPOSTS.slice(0, 3);
   // Get the first 3 projects
   const featuredProjects = PROJECTS.slice(0, 3);
 
