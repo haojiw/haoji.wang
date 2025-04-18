@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
+import PageTransition from '@/components/PageTransition';
 
 // Importing the blog post data
 import { BLOG_POSTS, type BlogPost } from './blog/data';
@@ -23,7 +24,7 @@ export default function Home() {
   const featuredProjects = PROJECTS.slice(0, 3);
 
   return (
-    <>
+    <PageTransition>
       <section className="flex flex-col md:flex-row items-end justify-between py-16 border-b border-border">
         <div className="w-full md:w-3/5 flex flex-col justify-end h-full">
           <h1 className="text-6xl md:text-7xl font-body font-normal mb-8 text-accent">
@@ -37,7 +38,7 @@ export default function Home() {
             <div className="flex md:justify-end justify-start mb-8 md:mb-0">
               <Link 
                 href="/about" 
-                className="bg-accent text-bg py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300"
+                className="bg-accent text-bg py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300 hover:translate-y-[-2px] transform"
               >
                 Who's this?
               </Link>
@@ -72,7 +73,7 @@ export default function Home() {
             <Link 
               key={post.slug} 
               href={`/blog/${post.slug}`} 
-              className="block hover:bg-bg/60 transition-colors duration-200 p-3 -mx-3 rounded-md"
+              className="block hover:bg-bg/60 transition-all duration-200 p-3 -mx-3 rounded-md hover:translate-x-1 transform"
             >
               <div className="flex justify-between items-baseline">
                 <h3 className="text-xl font-body">{post.title}</h3>
@@ -83,7 +84,7 @@ export default function Home() {
         
         <Link 
           href="/blog" 
-          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline"
+          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline hover:translate-x-1 transition-transform duration-200 transform"
         >
           VIEW ALL POSTS →
         </Link>
@@ -109,12 +110,11 @@ export default function Home() {
         
         <Link 
           href="/work" 
-          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline"
+          className="inline-block mt-4 text-accent font-sans text-sm uppercase tracking-wide hover:underline hover:translate-x-1 transition-transform duration-200 transform"
         >
           VIEW ALL PROJECTS →
         </Link>
       </section>
-
-    </>
+    </PageTransition>
   );
 } 

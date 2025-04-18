@@ -24,11 +24,22 @@
   }
   
   a {
-    @apply hover:underline transition-all duration-200;
+    @apply hover:underline transition-all duration-200 ease-in-out;
   }
   
   hr {
     @apply border-t border-text my-12;
+  }
+
+  button, 
+  a, 
+  .btn {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Add smooth scrolling to the page */
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -78,4 +89,35 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+/* Animation Utilities */
+@layer utilities {
+  .animated-underline {
+    @apply relative;
+  }
+  
+  .animated-underline::after {
+    @apply content-[''] absolute left-0 bottom-0 w-0 h-[2px] bg-accent transition-all duration-300 ease-in-out;
+  }
+  
+  .animated-underline:hover::after {
+    @apply w-full;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .hover-lift:hover {
+    @apply transform -translate-y-1;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+  
+  .hover-scale:hover {
+    @apply transform scale-105;
+  }
 }
