@@ -1,24 +1,22 @@
 "use client";
 
-import { motion, useInView } from 'framer-motion';
-import { ReactNode, useRef } from 'react';
+import { motion, useInView, type Variants } from "framer-motion";
+import { ReactNode, useRef } from "react";
 
 type AnimateOnScrollProps = {
   children: ReactNode;
-  variants?: {
-    hidden: object;
-    visible: object;
-  };
+  variants?: Variants;
   className?: string;
   delay?: number;
   duration?: number;
-  threshold?: number;
+  /** How much of the element must be in view (0 – 1, "some", or "all") */
+  amount?: number | "some" | "all";
   once?: boolean;
 };
 
-const defaultVariants = {
+const defaultVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0 },
 };
 
 const AnimateOnScroll = ({
@@ -27,11 +25,13 @@ const AnimateOnScroll = ({
   className = "",
   delay = 0,
   duration = 0.5,
-  threshold = 0.1,
-  once = true
+  amount = 0.1,
+  once = true,
 }: AnimateOnScrollProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once, threshold });
+
+  // framer‑motion v7: use “amount”, not “threshold”
+  const isInView = useInView(ref, { once, amount });
 
   return (
     <motion.div
@@ -39,11 +39,7 @@ const AnimateOnScroll = ({
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={variants}
-      transition={{ 
-        duration, 
-        delay,
-        ease: "easeOut" 
-      }}
+      transition={{ duration, delay, ease: "easeOut" }}
       className={className}
     >
       {children}
@@ -51,4 +47,4 @@ const AnimateOnScroll = ({
   );
 };
 
-export default AnimateOnScroll; 
+export default AnimateOnScroll;
