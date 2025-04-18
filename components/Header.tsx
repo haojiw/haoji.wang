@@ -16,7 +16,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`py-8 md:py-12 sticky top-0 z-50 bg-bg/80 backdrop-blur-sm transition-all duration-300 ${scrollY > 20 ? 'py-4 md:py-6' : ''}`}>
+    <header className={`py-8 md:py-12 sticky top-0 z-50 bg-bg/90 backdrop-blur-sm transition-all duration-300 ${scrollY > 20 ? 'py-4 md:py-6' : ''}`}>
       <nav className="flex items-center justify-between">
         <div className="text-xl md:text-xl font-body font-bold">
           <Link href="/" className="no-underline hover:no-underline text-accent">

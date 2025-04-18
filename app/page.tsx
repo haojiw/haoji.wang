@@ -6,7 +6,7 @@ import PageTransition from '@/components/PageTransition';
 // Importing the blog post data
 import { BLOG_POSTS, type BlogPost } from './blog/data';
 // Import projects from work page
-import { PROJECTS, type Project } from './work/projects';
+import { PROJECTS, type Project } from './work/data';
 
 // Format date as MMM DD, YYYY
 function formatDate(date: Date): string {
