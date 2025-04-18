@@ -12,7 +12,7 @@ function formatDate(date: Date): string {
 
 export default function BlogPage() {
   return (
-    <div className="py-16">
+    <div className="py-10 md:py-16">
       <h2 className="text-4xl md:text-5xl text-accent font-serif2 font-bold mb-8 mt-16">
         BLOG
       </h2>

@@ -1,12 +1,13 @@
 "use client";
 
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const navRef = useRef<HTMLDivElement>(null);
 
   // Handle scroll events
   useEffect(() => {
@@ -15,10 +16,22 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isOpen && navRef.current && !navRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
+
   return (
     <header className={`py-8 md:py-12 sticky top-0 z-50 bg-bg/90 backdrop-blur-sm transition-all duration-300 ${scrollY > 20 ? 'py-4 md:py-6' : ''}`}>
-      <nav className="flex items-center justify-between">
-        <div className="text-xl md:text-xl font-body font-bold">
+      <nav className="flex items-center justify-between relative" ref={navRef}>
+        <div className="text-xl md:text-xl font-body font-bold px-2">
           <Link href="/" className="no-underline hover:no-underline text-accent">
             haoji.wang
           </Link>
@@ -46,11 +59,11 @@ const Header = () => {
         {/* Mobile Hamburger Button */}
         <button 
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 z-50"
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 z-50 relative"
           aria-label="Toggle Menu"
         >
           <motion.span 
-            animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
             className="w-6 h-0.5 bg-accent mb-1.5 transform origin-center"
           />
@@ -60,7 +73,7 @@ const Header = () => {
             className="w-6 h-0.5 bg-accent mb-1.5"
           />
           <motion.span 
-            animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
             className="w-6 h-0.5 bg-accent transform origin-center"
           />
@@ -69,47 +82,35 @@ const Header = () => {
         {/* Mobile Navigation Drawer */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
+            <motion.div
+              /* slide in from right → left */
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-0 right-0 w-3/4 h-screen bg-bg shadow-lg z-40 flex flex-col items-center justify-center"
+              transition={{ type: 'tween', duration: 0.35, ease: 'easeInOut' }}
+
+              /* position absolute to overlay the logo */
+              className="absolute top-0 left-0 w-full h-full
+                        bg-bg/95 backdrop-blur-sm z-40 flex items-center"
             >
-              <motion.ul 
-                className="flex flex-col space-y-8 font-sans text-xl tracking-wide text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
+              {/* Links in one row, centred vertically */}
+              <ul className="mx-auto flex flex-row gap-10 font-sans text-lg tracking-wide">
                 <li>
-                  <Link 
-                    href="/blog" 
-                    className="hover:underline block py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
+                  <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:underline">
                     BLOG
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    href="/work" 
-                    className="hover:underline block py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
+                  <Link href="/work" onClick={() => setIsOpen(false)} className="hover:underline">
                     WORK
                   </Link>
                 </li>
                 <li>
-                  <Link 
-                    href="/about" 
-                    className="hover:underline block py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
+                  <Link href="/about" onClick={() => setIsOpen(false)} className="hover:underline">
                     ABOUT
                   </Link>
                 </li>
-              </motion.ul>
+              </ul>
             </motion.div>
           )}
         </AnimatePresence>
