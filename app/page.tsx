@@ -62,7 +62,7 @@ export default function Home() {
       </section>
 
       <section className="border-b border-border py-6">
-        <h2 className="text-3xl md:text-4xl text-accent font-serif font-normal mb-8 mt-16">
+        <h2 className="text-4xl md:text-5xl text-accent font-serif font-normal mb-8 mt-16">
           <Link href="/blog" className="no-underline hover:no-underline">
             BLOG
           </Link>
@@ -91,7 +91,7 @@ export default function Home() {
       </section>
 
       <section className="py-6">
-        <h2 className="text-3xl md:text-4xl text-accent font-serif font-normal mb-8 mt-16">
+        <h2 className="text-4xl md:text-5xl text-accent font-serif font-normal mb-8 mt-16">
           <Link href="/work" className="no-underline hover:no-underline">
             WORK
           </Link>
