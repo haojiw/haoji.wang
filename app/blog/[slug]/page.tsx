@@ -82,11 +82,15 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     ),
   };
 
+  // Calculate reading time
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.round(words / 200)); // 200 wpm baseline
+
   return (
     <article className="max-w-3xl mx-auto pt-16 pb-24">
       <div className="mb-8 pb-8">
         <time className="block font-sans text-sm uppercase tracking-wide text-muted mb-4">
-          {formatDate(data.date)}
+          {formatDate(data.date)} • {minutes} min read 
         </time>
         <h1 className="text-4xl md:text-5xl font-serif text-accent mb-6">
           {data.title}
