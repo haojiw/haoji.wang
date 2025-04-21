@@ -17,7 +17,7 @@ export default function BlogPage() {
         BLOG
       </h2>
       <p className="font-body text-lg mb-12">
-        At this moment, I'm trying to write some micro-essays -- digestable glimpses into my mind.
+        At this moment, I'm trying to write some micro-essays — digestable glimpses into my mind.
       </p>
       
       <div className="space-y-8">
