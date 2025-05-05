@@ -38,7 +38,7 @@ export default function Home() {
             <div className="flex md:justify-end justify-start mb-8 md:mb-0">
               <Link 
                 href="/about" 
-                className="bg-accent text-bg py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/75 transition-colors duration-300 hover:translate-y-[-2px] transform"
+                className="bg-accent text-bg py-3 px-6 font-sans text-sm uppercase tracking-wide no-underline hover:bg-accent/85 transition-colors duration-300 hover:translate-y-[-2px] transform"
               >
                 Who's this?
               </Link>

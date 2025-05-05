@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="flex justify-center md:justify-start">
           <Link 
             href="mailto:on3hodge@gmail.com" 
-            className="inline-block px-4 py-2 border border-text rounded-full font-sans text-sm uppercase tracking-wide hover:bg-accent hover:text-bg transition-colors"
+            className="inline-block px-4 py-2 border border-accent text-accent rounded-full font-sans text-sm uppercase tracking-wide hover:bg-brand hover:text-bg transition-colors"
           >
             email
           </Link>

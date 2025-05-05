@@ -84,7 +84,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
 
   // Calculate reading time
   const words = content.trim().split(/\s+/).length;
-  const minutes = Math.max(1, Math.round(words / 200)); // 200 wpm baseline
+  const minutes = Math.max(1, Math.round(words / 225)); // 225 wpm baseline
 
   return (
     <article className="max-w-3xl mx-auto pt-16 pb-24">

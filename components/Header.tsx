@@ -50,47 +50,74 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8 font-sans text-lg tracking-wide">
-          <li>
-            <Link href="/blog" className="hover:underline">
-              BLOG
-            </Link>
-          </li>
-          <li>
-            <Link href="/work" className="hover:underline">
-              WORK
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="hover:underline">
-              ABOUT
-            </Link>
-          </li>
-        </ul>
+        <div className="flex items-center">
+          {/* Chinese Blog Button - Always visible on desktop */}
+          <a 
+            href="https://haojiw.notion.site/1ea1103b16ef807db204f3a8591f220d?pvs=4" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hidden md:block bg-accent hover:bg-brand hover:no-underline text-bg px-3 py-1 mr-9 rounded-lg transition-colors"
+          >
+            中文
+          </a>
 
-        {/* Mobile Hamburger Button */}
-        <button 
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col justify-center items-center w-10 h-10 z-50 relative"
-          aria-label="Toggle Menu"
-        >
-          <motion.span 
-            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-accent mb-1.5 transform origin-center"
-          />
-          <motion.span 
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-accent mb-1.5"
-          />
-          <motion.span 
-            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="w-6 h-0.5 bg-accent transform origin-center"
-          />
-        </button>
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex space-x-8 font-sans text-lg tracking-wide">
+            <li>
+              <Link href="/blog" className="hover:underline">
+                BLOG
+              </Link>
+            </li>
+            <li>
+              <Link href="/work" className="hover:underline">
+                WORK
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:underline">
+                ABOUT
+              </Link>
+            </li>
+          </ul>
+
+          {/* Mobile: Chinese Blog Button + Hamburger */}
+          <div className="md:hidden flex items-center">
+            {/* Mobile Chinese Blog Button - visible when drawer is closed */}
+            {!isOpen && (
+              <a 
+                href="https://haojiw.notion.site/1ea1103b16ef807db204f3a8591f220d?pvs=4" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-accent hover:bg-brand hover:no-underline text-bg px-3 py-1 mr-4 rounded-lg transition-colors"
+              >
+                中文
+              </a>
+            )}
+            
+            {/* Mobile Hamburger Button */}
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex flex-col justify-center items-center w-10 h-10 z-50 relative"
+              aria-label="Toggle Menu"
+            >
+              <motion.span 
+                animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-accent mb-1.5 transform origin-center"
+              />
+              <motion.span 
+                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-accent mb-1.5"
+              />
+              <motion.span 
+                animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-0.5 bg-accent transform origin-center"
+              />
+            </button>
+          </div>
+        </div>
 
         {/* Mobile Navigation Drawer */}
         <AnimatePresence>
