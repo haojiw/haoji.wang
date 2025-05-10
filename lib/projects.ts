@@ -7,10 +7,10 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    title: 'Sifu Wellness Chatbot',
-    description: 'A customized GPT that gives you life advice, like Master Oogway',
-    slug: 'sifu',
-    github: 'https://chatgpt.com/g/g-679a7291fe388191962bc6f2080a0e00-sifu',
+    title: 'Mentor AI App',
+    description: 'A pocket Aristotle that guides you with wisdom, not just answers.',
+    slug: 'mentor',
+    github: 'https://mentor-app-eight.vercel.app/',
   },
   {
     title: 'Gmail Inbox Summarizer',
