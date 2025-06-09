@@ -54,7 +54,7 @@ const Footer = () => {
             </svg>
           </a>
           <a 
-            href="https://github.com/onehodge" 
+            href="https://github.com/haojiw" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-accent hover:text-brand transition-colors"

@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
     title: 'Gmail Inbox Summarizer',
     description: 'An AI-powered Gmail add-on that summarizes your daily emails',
     slug: 'gmail-summarizer',
-    github: 'https://github.com/onehodge/email-summary',
+    github: 'https://github.com/haojiw/email-summary',
   },
   {
     title: 'WhatsBruin Website',
@@ -28,13 +28,13 @@ export const PROJECTS: Project[] = [
     title: 'Sports Analytics Articles',
     description: 'Home Advantage in the UCL, and Finding the next Sergio Busquets',
     slug: 'bsa-articles',
-    github: 'https://github.com/onehodge/BSA-Data-Projects',
+    github: 'https://github.com/haojiw/BSA-Data-Projects',
   },
   {
     title: 'Machine Learning Projects',
     description: 'Predicting World Happiness, AirBnb Superhosts, and Handwritten Digits',
     slug: 'ml-projects',
-    github: 'https://github.com/onehodge/World-Happiness-Report-Predictor',
+    github: 'https://github.com/haojiw/World-Happiness-Report-Predictor',
   },
   {
     title: 'Business Plan Competitions',
