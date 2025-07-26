@@ -19,7 +19,7 @@ export default function AboutPage() {
           </p>
           <p className="font-body text-lg mb-6">
             I care a lot about people, and think a lot about the world around me. The goal is to make both feel a little better. 
-            Right now, I'm building an AI wellness assistant to help people untangle their minds. 
+            Right now, I am building a voice journal to help people find clarity and peace of mind. 
           </p>
           <p className="font-body text-lg mb-6">
             Before LA, I grew up in Wenzhou, China, and spent my high school years in Singapore. 
