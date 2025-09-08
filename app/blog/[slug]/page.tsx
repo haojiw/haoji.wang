@@ -3,6 +3,7 @@ import path from 'path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import matter from 'gray-matter';
+import Video from '../../../components/Video';
 
 // Define the type for metadata in MDX files
 type Frontmatter = {
@@ -80,6 +81,7 @@ export default async function BlogPost({ params }: { params: { slug: string } })
     hr: (props: any) => (
       <hr className="my-10 border-t border-border" {...props} />
     ),
+    Video: Video,
   };
 
   // Calculate reading time
