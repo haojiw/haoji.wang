@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Analog - Voice Memory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette based on paper aesthetics and provided imagery */
+            --bg-paper: #FFF6E9;
+            --bg-panel: #EAE6DD;
+            --ink-dark: #342b22;
+            --ink-light: #7A756D;
+            --ink-faint: #C2BBB0;
+            
+            --bg-paper2: #ECE1C9;
+
+            /* Accents from Image 1 & 2 */
+            --accent-terra: #C95A3A;
+            --accent-sun: #E2A746;
+            
+            /* Typography */
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-mono: 'Space Mono', monospace;
+            
+            /* Spacing & Borders */
+            --border-main: 1px solid var(--ink-dark);
+            --border-faint: 1px solid var(--ink-faint);
+            --border-dashed: 1px dashed var(--ink-faint);
+            --nav-height: 60px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0A0A0A;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: var(--font-serif);
+            color: var(--ink-dark);
+            overflow: hidden;
+        }
+
+        /* --- Device Frame & Texture --- */
+        .device-frame {
+            position: relative;
+            width: 390px;
+            height: 844px;
+            max-height: 100vh;
+            background-color: var(--bg-paper);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            /* Soft inner shadow for depth */
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.03);
+        }
+
+        /* Grainy Paper Texture Overlay */
+        .noise-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.3;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* --- Typography Helpers --- */
+        .mono-sm {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+        .serif-italic {
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        /* --- Header (Top Left/Right) --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            z-index: 50;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--ink-faint);
+            transition: all 0.3s ease;
+        }
+
+        /* --- View Management --- */
+        .view-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+            /* Hide scrollbar */
+            scrollbar-width: none; 
+        }
+        .view::-webkit-scrollbar { display: none; }
+        .view.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- View 1: Capture (Recording State) --- */
+        #view-capture {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .capture-stage {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Smooth expanding rings */
+        .ambient-rings {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid var(--ink-faint);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ring-1 { width: 80px; height: 80px; border-style: dashed; }
+        .ring-2 { width: 160px; height: 160px; }
+        .ring-3 { width: 240px; height: 240px; opacity: 0.5; border-style: dashed; }
+
+        .record-btn {
+            position: relative;
+            z-index: 10;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--ink-dark);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease, background-color 0.4s ease;
+        }
+
+        .record-btn::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-sun);
+            border-radius: 50%;
+            transition: all 0.4s ease;
+        }
+
+        .quote-container {
+            position: absolute;
+            bottom: 40px;
+            text-align: center;
+            width: 100%;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Active Recording State Animations */
+        body.is-recording .header-left { opacity: 0; transform: translateY(-10px); }
+        body.is-recording .quote-container { opacity: 0; transform: translateY(10px); }
+        body.is-recording .tab-bar { opacity: 0; transform: translateY(20px); pointer-events: none; }
+        
+        body.is-recording .header-status { color: var(--accent-terra); }
+        body.is-recording .status-dot { background-color: var(--accent-terra); box-shadow: 0 0 8px var(--accent-terra); }
+        
+        body.is-recording .record-btn {
+            transform: scale(0.9);
+            background-color: var(--bg-paper);
+            border: 1px solid var(--accent-terra);
+        }
+        body.is-recording .record-btn::after {
+            background-color: var(--accent-terra);
+            transform: scale(2.5);
+            border-radius: 2px; /* Turns into a stop square */
+        }
+
+        @keyframes breatheRings {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.2; }
+        }
+
+        body.is-recording .ring { border-color: var(--accent-terra); }
+        body.is-recording .ring-1 { animation: breatheRings 2s infinite ease-in-out; }
+        body.is-recording .ring-2 { animation: breatheRings 2s infinite ease-in-out 0.3s; }
+        body.is-recording .ring-3 { animation: breatheRings 2s infinite ease-in-out 0.6s; }
+
+
+        /* --- View 2: Ledger (Journal List) --- */
+        #view-ledger {
+            padding: 0 24px;
+        }
+
+        .ledger-title {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            border-bottom: var(--border-main);
+            padding-bottom: 16px;
+            line-height: 1;
+        }
+
+        .ledger-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ledger-entry {
+            display: grid;
+            grid-template-columns: 40px 1fr auto;
+            gap: 16px;
+            padding: 24px 0;
+            border-bottom: var(--border-dashed);
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .ledger-entry:hover { opacity: 0.7; }
+        .ledger-entry:last-child { border-bottom: none; }
+
+        .entry-index { color: var(--ink-light); }
+        
+        .entry-content { display: flex; flex-direction: column; gap: 8px; }
+        .entry-date { font-size: 1.5rem; line-height: 1; }
+        .entry-preview { font-size: 1rem; color: var(--ink-light); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .entry-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+        .entry-mood { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--ink-dark); }
+        .mood-terra { background-color: var(--accent-terra); border-color: var(--accent-terra); }
+        .mood-sun { background-color: var(--accent-sun); border-color: var(--accent-sun); }
+        .mood-empty { background-color: transparent; }
+
+
+        /* --- Detail View (Slide over) --- */
+        .detail-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-paper);
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .detail-overlay.active { transform: translateY(0); }
+
+        .detail-header {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--border-dashed);
+        }
+        .btn-close {
+            background: none; border: none; font-family: var(--font-mono); font-size: 0.8rem;
+            cursor: pointer; color: var(--ink-light); text-transform: uppercase; letter-spacing: 0.1em;
+        }
+
+        .detail-content {
+            padding: 32px 24px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .player-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 16px;
+            border: var(--border-main);
+            background-color: var(--bg-panel);
+        }
+        .play-btn {
+            width: 32px; height: 32px; border-radius: 50%; border: var(--border-main);
+            background: transparent; display: flex; justify-content: center; align-items: center; cursor: pointer;
+        }
+        .play-icon { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid var(--ink-dark); margin-left: 2px; }
+        .waveform { flex: 1; height: 20px; background: repeating-linear-gradient(to right, var(--ink-light) 0, var(--ink-light) 2px, transparent 2px, transparent 6px); opacity: 0.3; }
+
+        .transcript {
+            font-size: 1.25rem; line-height: 1.6; margin-bottom: 40px;
+        }
+
+        .ai-insight {
+            border-top: 2px solid var(--ink-dark);
+            padding-top: 24px;
+            position: relative;
+        }
+        .ai-insight::before {
+            content: '✦'; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+            background-color: var(--bg-paper); padding: 0 8px; color: var(--accent-sun); font-size: 14px;
+        }
+        .insight-title { text-align: center; margin-bottom: 16px; color: var(--ink-light); }
+        .insight-text { font-size: 1.1rem; font-style: italic; text-align: center; color: var(--accent-terra); }
+
+
+        /* --- View 3: Mind (Universe Metaphor) --- */
+        #view-mind {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .universe-stage {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: var(--border-dashed);
+            overflow: hidden;
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%; left: 50%;
+            border-radius: 50%;
+            border: 1px solid var(--ink-faint);
+            transform: translate(-50%, -50%);
+        }
+        .orbit-1 { width: 120px; height: 120px; border-style: dashed; }
+        .orbit-2 { width: 220px; height: 220px; }
+        .orbit-3 { width: 340px; height: 340px; border-style: dashed; }
+
+        .sun-core {
+            position: absolute;
+            width: 24px; height: 24px;
+            background-color: var(--accent-sun);
+            border-radius: 50%;
+            z-index: 10;
+            box-shadow: 0 0 30px rgba(226, 167, 70, 0.4);
+        }
+
+        /* Planets & animations */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background-color: var(--ink-dark);
+            transform-origin: center;
+        }
+        .p-terra { background-color: var(--accent-terra); }
+        .p-ring { border: 1px solid var(--ink-dark); background: transparent; }
+
+        /* Rotate container to animate planets along orbit */
+        .orbit-wrapper {
+            position: absolute; top: 50%; left: 50%; width: 100%; height: 100%;
+            transform: translate(-50%, -50%);
+            animation: rotateOrbit linear infinite;
+        }
+        .ow-1 { animation-duration: 25s; width: 120px; height: 120px; }
+        .ow-2 { animation-duration: 40s; width: 220px; height: 220px; animation-direction: reverse; }
+        .ow-3 { animation-duration: 60s; width: 340px; height: 340px; }
+
+        @keyframes rotateOrbit { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+
+        /* Positioning planets on the edge of their orbit wrapper */
+        .ow-1 .planet { top: -4px; left: 50%; width: 8px; height: 8px; margin-left: -4px; }
+        .ow-2 .planet { top: 50%; right: -6px; width: 12px; height: 12px; margin-top: -6px; }
+        .ow-3 .planet.p1 { bottom: -8px; left: 50%; width: 16px; height: 16px; margin-left: -8px; }
+        .ow-3 .planet.p2 { top: 20%; left: 5px; width: 6px; height: 6px; }
+
+        .mind-data {
+            padding: 32px 24px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .mind-quote {
+            font-size: 1.6rem;
+            line-height: 1.3;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+        }
+
+        .mind-tags {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+        .m-tag {
+            border: var(--border-main);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+
+        /* --- Tab Bar --- */
+        .tab-bar {
+            display: flex;
+            height: var(--nav-height);
+            border-top: var(--border-main);
+            background-color: var(--bg-paper);
+            z-index: 50;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .tab {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-right: var(--border-main);
+            cursor: pointer;
+            color: var(--ink-light);
+            transition: color 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+        .tab:last-child { border-right: none; }
+        
+        .tab.active {
+            color: var(--ink-dark);
+            background-color: var(--bg-panel);
+        }
+
+        .tab-indicator {
+            position: absolute;
+            top: 8px; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 4px; border-radius: 50%;
+            background-color: var(--accent-terra);
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .tab.active .tab-indicator { opacity: 1; }
+
+    </style>
+</head>
+<body>
+
+<div class="device-frame">
+    <div class="noise-overlay"></div>
+
+    <header class="header mono-sm">
+        <div class="header-left">EST. MMXXIV</div>
+        <div class="header-status" id="global-status">
+            <div class="status-dot"></div>
+            <span id="status-text">SILENT</span>
+        </div>
+    </header>
+
+    <div class="view-container">
+        
+        <div id="view-capture" class="view active">
+            <div class="capture-stage">
+                <div class="ambient-rings">
+                    <div class="ring ring-1"></div>
+                    <div class="ring ring-2"></div>
+                    <div class="ring ring-3"></div>
+                </div>
+                <button class="record-btn" id="btn-record" aria-label="Record"></button>
+            </div>
+            <div class="quote-container serif-italic">
+                i speak therefore i am
+            </div>
+        </div>
+
+        <div id="view-ledger" class="view">
+            <h1 class="ledger-title">Archive</h1>
+            <div class="ledger-list">
+                
+                <div class="ledger-entry" onclick="openDetail('Oct 24', '04:12', 'A moment of clarity regarding the noise of the city...', 'Clarity')">
+                    <div class="entry-index mono-sm">01</div>
+                    <div class="entry-content">
+                        <div class="entry-date">Oct 24</div>
+                        <div class="entry-preview">A moment of clarity regarding the noise of the city and how it affects my baseline anxiety...</div>
+                    </div>
+                    <div class="entry-meta mono-sm">
+                        <div class="entry-mood mood-sun"></div>
+                        <span>04:12</span>
+                    </div>
+                </div>
+
+                <div class="ledger-entry" onclick="openDetail('Oct 22', '12:05', 'Feeling overwhelmed by the scale of things. Trying to shrink my focus down to the immediate next step.', 'Gravity')">
+                    <div class="entry-index mono-sm">02</div>
+                    <div class="entry-content">
+                        <div class="entry-date">Oct 22</div>
+                        <div class="entry-preview">Feeling overwhelmed by the scale of things. Trying to shrink my focus...</div>
+                    </div>
+                    <div class="entry-meta mono-sm">
+                        <div class="entry-mood mood-terra"></div>
+                        <span>12:05</span>
+                    </div>
+                </div>
+
+                <div class="ledger-entry" onclick="openDetail('Oct 18', '01:45', 'Just a brief thought on the quietness of the morning before anyone else wakes up.', 'Stillness')">
+                    <div class="entry-index mono-sm">03</div>
+                    <div class="entry-content">
+                        <div class="entry-date">Oct 18</div>
+                        <div class="entry-preview">Just a brief thought on the quietness of the morning before anyone...</div>
+                    </div>
+                    <div class="entry-meta mono-sm">
+                        <div class="entry-mood mood-empty"></div>
+                        <span>01:45</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="view-mind" class="view">
+            <div class="universe-stage">
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="orbit orbit-3"></div>
+                
+                <div class="sun-core"></div>
+
+                <div class="orbit-wrapper ow-1">
+                    <div class="planet p-terra"></div>
+                </div>
+                <div class="orbit-wrapper ow-2">
+                    <div class="planet p-ring"></div>
+                </div>
+                <div class="orbit-wrapper ow-3">
+                    <div class="planet p1"></div>
+                    <div class="planet p-terra p2"></div>
+                </div>
+            </div>
+
+            <div class="mind-data">
+                <div class="mono-sm" style="color: var(--ink-light); margin-bottom: 16px;">Pattern Synthesis</div>
+                <div class="mind-quote">"Your feelings matter, no matter how small you feel out there."</div>
+                <div class="mind-tags mono-sm">
+                    <div class="m-tag">SOLITUDE</div>
+                    <div class="m-tag" style="color: var(--accent-terra); border-color: var(--accent-terra);">GRAVITY</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="detail-overlay" class="detail-overlay">
+        <div class="detail-header">
+            <button class="btn-close" onclick="closeDetail()">← Ledger</button>
+            <div class="mono-sm" id="detail-meta">OCT 24 • 04:12</div>
+        </div>
+        <div class="detail-content">
+            <div class="player-bar">
+                <button class="play-btn"><div class="play-icon"></div></button>
+                <div class="waveform"></div>
+                <div class="mono-sm">00:00</div>
+            </div>
+            
+            <div class="transcript" id="detail-transcript">
+                Transcript goes here...
+            </div>
+
+            <div class="ai-insight">
+                <div class="insight-title mono-sm">THE ARCHITECT NOTES</div>
+                <div class="insight-text" id="detail-insight">
+                    "A tension between seeking movement and desiring an anchor."
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="tab-bar mono-sm">
+        <div class="tab active" data-target="view-capture">
+            <div class="tab-indicator"></div>
+            Capture
+        </div>
+        <div class="tab" data-target="view-ledger">
+            <div class="tab-indicator"></div>
+            Archive
+        </div>
+        <div class="tab" data-target="view-mind">
+            <div class="tab-indicator"></div>
+            Mind
+        </div>
+    </nav>
+</div>
+
+<script>
+    // --- Tab Navigation ---
+    const tabs = document.querySelectorAll('.tab');
+    const views = document.querySelectorAll('.view');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active from all tabs & views
+            tabs.forEach(t => t.classList.remove('active'));
+            views.forEach(v => v.classList.remove('active'));
+
+            // Add active to clicked tab and corresponding view
+            tab.classList.add('active');
+            const targetId = tab.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
+    // --- Recording Interaction ---
+    const btnRecord = document.getElementById('btn-record');
+    const statusText = document.getElementById('status-text');
+    let isRecording = false;
+
+    btnRecord.addEventListener('click', () => {
+        isRecording = !isRecording;
+        if (isRecording) {
+            document.body.classList.add('is-recording');
+            statusText.innerText = 'LISTENING';
+        } else {
+            document.body.classList.remove('is-recording');
+            statusText.innerText = 'SAVING...';
+            
+            // Fake processing delay
+            setTimeout(() => {
+                if(!isRecording) statusText.innerText = 'SILENT';
+            }, 1500);
+        }
+    });
+
+    // --- Detail View Interaction ---
+    const detailOverlay = document.getElementById('detail-overlay');
+    
+    function openDetail(date, duration, text, insightKeyword) {
+        document.getElementById('detail-meta').innerText = `${date.toUpperCase()} • ${duration}`;
+        document.getElementById('detail-transcript').innerText = text;
+        
+        // Mock dynamic insight based on passed keyword
+        const insights = {
+            'Clarity': "The fog lifted briefly. A realization of what truly anchors you.",
+            'Gravity': "A recurring theme of feeling pulled by external expectations.",
+            'Stillness': "You speak of silence whenever the internal noise grows too loud."
+        };
+        document.getElementById('detail-insight').innerText = `"${insights[insightKeyword] || insights['Stillness']}"`;
+        
+        detailOverlay.classList.add('active');
+    }
+
+    function closeDetail() {
+        detailOverlay.classList.remove('active');
+    }
+</script>
+
+</body>
+</html>
