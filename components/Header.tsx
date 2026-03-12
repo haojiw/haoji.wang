@@ -51,12 +51,17 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          {/* Chinese Blog Button - Always visible on desktop */}
+          {/* Chinese Blog Button - Unified */}
           <a 
             href="https://haojiw.notion.site/1ea1103b16ef807db204f3a8591f220d?pvs=4" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="hidden md:block bg-accent hover:bg-brand hover:no-underline text-bg px-3 py-1 mr-9 rounded-lg transition-colors"
+            className={`
+              bg-accent hover:bg-brand hover:no-underline text-bg 
+              px-3 py-1 rounded-lg transition-colors
+              mr-4 md:mr-9
+              ${isOpen ? 'hidden md:block' : 'block'}
+            `}
           >
             中文
           </a>
@@ -80,20 +85,8 @@ const Header = () => {
             </li>
           </ul>
 
-          {/* Mobile: Chinese Blog Button + Hamburger */}
+          {/* Mobile: Hamburger */}
           <div className="md:hidden flex items-center">
-            {/* Mobile Chinese Blog Button - visible when drawer is closed */}
-            {!isOpen && (
-              <a 
-                href="https://haojiw.notion.site/1ea1103b16ef807db204f3a8591f220d?pvs=4" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="bg-accent hover:bg-brand hover:no-underline text-bg px-3 py-1 mr-4 rounded-lg transition-colors"
-              >
-                中文
-              </a>
-            )}
-            
             {/* Mobile Hamburger Button */}
             <button 
               onClick={() => setIsOpen(!isOpen)}

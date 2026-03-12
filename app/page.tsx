@@ -25,8 +25,8 @@ export default function Home() {
 
   return (
     <PageTransition>
-      <section className="flex flex-col md:flex-row items-end justify-between py-16 border-b border-border">
-        <div className="w-full md:w-3/5 flex flex-col justify-end h-full">
+      <section className="flex flex-col md:flex-row items-center justify-between py-16 border-b border-border">
+        <div className="w-full md:w-3/5 flex flex-col justify-center">
           <h1 className="text-6xl md:text-7xl font-body font-normal mb-8 text-accent">
             <span className="block mt-6">Haoji Wang</span>
           </h1>
