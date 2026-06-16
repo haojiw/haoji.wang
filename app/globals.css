@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-bg: 245 242 236;
+    --color-text: 37 34 31;
+    --color-muted: 143 137 129;
+    --color-accent: 111 62 43;
+    --color-brand: 183 53 36;
+    --color-border: 216 208 197;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-bg text-text font-serif antialiased;
   }
@@ -12,15 +25,15 @@
   }
   
   h1 {
-    @apply text-5xl md:text-6xl;
+    @apply text-2xl md:text-3xl;
   }
   
   h2 {
-    @apply text-4xl md:text-5xl;
+    @apply text-xl md:text-2xl;
   }
   
   h3 {
-    @apply text-3xl md:text-4xl;
+    @apply text-lg md:text-xl;
   }
   
   a {
@@ -37,9 +50,8 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
-  /* Add smooth scrolling to the page */
-  html {
-    scroll-behavior: smooth;
+  ::selection {
+    @apply bg-brand text-bg;
   }
 }
 

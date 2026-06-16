@@ -4,16 +4,16 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <main className="h-screen w-full bg-bg flex items-center justify-center">
-      <div className="text-center px-6 -mt-40">
-        <h1 className="text-7xl md:text-9xl font-serif text-accent mb-4">404</h1>
-        <p className="text-3xl font-serif text-text mb-6">Not Here</p>
-        <p className="text-muted text-lg font-body mb-10 max-w-md mx-auto">
+    <main className="flex h-screen w-full items-center justify-center bg-bg">
+      <div className="px-6 text-center">
+        <h1 className="mb-4 font-serif text-4xl text-accent md:text-5xl">404</h1>
+        <p className="mb-4 font-serif text-xl text-text">Not Here</p>
+        <p className="mx-auto mb-8 max-w-md font-body text-base text-muted">
           maybe you're lost, maybe you're just early. 
         </p>
         <Link
           href="/"
-          className="inline-block px-6 py-3 border border-text rounded-full font-sans text-sm uppercase tracking-wide hover:bg-accent hover:text-bg transition-colors"
+          className="inline-block rounded-full border border-text px-5 py-2 font-sans text-sm uppercase tracking-wide transition-colors hover:bg-accent hover:text-bg"
         >
           Let's Go Home
         </Link>

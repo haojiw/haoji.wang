@@ -4,18 +4,18 @@ import ArticleLayout from '@/app/components/ArticleLayout';
 import MarkdownRenderer from '@/app/components/MarkdownRenderer';
 import { getPost, getPostSlugs } from '@/lib/content';
 
-type BlogPostParams = {
+type WenPostParams = {
   params: {
     slug: string;
   };
 };
 
 export function generateStaticParams() {
-  return getPostSlugs('writing').map((slug) => ({ slug }));
+  return getPostSlugs('wen').map((slug) => ({ slug }));
 }
 
-export function generateMetadata({ params }: BlogPostParams): Metadata {
-  const post = getPost('writing', params.slug);
+export function generateMetadata({ params }: WenPostParams): Metadata {
+  const post = getPost('wen', params.slug);
 
   if (!post) {
     notFound();
@@ -27,8 +27,8 @@ export function generateMetadata({ params }: BlogPostParams): Metadata {
   };
 }
 
-export default function BlogPost({ params }: BlogPostParams) {
-  const post = getPost('writing', params.slug);
+export default function WenPost({ params }: WenPostParams) {
+  const post = getPost('wen', params.slug);
 
   if (!post) {
     notFound();
@@ -38,8 +38,9 @@ export default function BlogPost({ params }: BlogPostParams) {
     <ArticleLayout
       title={post.title}
       date={post.date}
+      language="zh"
     >
-      <MarkdownRenderer source={post.content} />
+      <MarkdownRenderer source={post.content} language="zh" />
     </ArticleLayout>
   );
 }

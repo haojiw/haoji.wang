@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { getPosts } from '@/lib/content';
 import { page, type as typeStyles } from '../theme';
 
-export default function BlogPage() {
-  const posts = getPosts('writing');
+export default function WenPage() {
+  const posts = getPosts('wen');
 
   return (
     <main className={page.shell}>
@@ -17,15 +17,15 @@ export default function BlogPage() {
         </header>
 
         <section className="mt-20">
-          <h1 className={`mb-5 ${typeStyles.homeSectionTitle}`}>
-            Writing
+          <h1 className={`mb-5 ${typeStyles.chineseHomeSectionTitle}`}>
+            写作
           </h1>
           <div className="space-y-4">
             {posts.map((post) => (
               <article key={post.slug}>
                 <Link
-                  href={`/blog/${post.slug}`}
-                  className={typeStyles.linkTitle}
+                  href={`/wen/${post.slug}`}
+                  className={typeStyles.chineseLinkTitle}
                 >
                   {post.title}
                 </Link>

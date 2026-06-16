@@ -2,22 +2,22 @@
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        bg: '#FAF8F2',
-        text: '#2F2F2F',
-        muted: '#8A8A7C',
-        accent: '#3F4B3B', //273b09
-        brand: '#617129',
-        border: '#dcd6cc',
+        bg: 'rgb(var(--color-bg) / <alpha-value>)',
+        text: 'rgb(var(--color-text) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        accent: 'rgb(var(--color-accent) / <alpha-value>)',
+        brand: 'rgb(var(--color-brand) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
       },
       fontFamily: {
-        serif: ['EB Garamond', 'serif'],
+        serif: ['Georgia', 'serif'],
         sans: ['Inter', 'sans-serif'],
-        body: ['Lora', 'serif'],
+        body: ['Georgia', 'serif'],
+        chinese: ['Noto Serif SC', 'Georgia', 'serif'],
         serif2: ['Cormorant Garamond', 'serif'],
         sans2: ['Space Grotesk', 'sans-serif'],
         handwriting: ['Indie Flower', 'serif'],
