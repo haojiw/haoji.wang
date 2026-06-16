@@ -8,9 +8,10 @@ type ProjectCardProps = {
   description: string;
   slug: string;
   github?: string; // Optional GitHub URL
+  basePath?: string;
 };
 
-const ProjectCard = ({ title, description, slug, github }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, slug, github, basePath = '/work' }: ProjectCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -8 }}
@@ -21,7 +22,7 @@ const ProjectCard = ({ title, description, slug, github }: ProjectCardProps) => 
       }}
     >
       <Link 
-        href={github || `/work/${slug}`} 
+        href={github || `${basePath}/${slug}`} 
         className="block border border-text p-6 no-underline hover:no-underline hover:bg-accent hover:text-bg transition-all duration-300 h-full"
         target={github ? "_blank" : "_self"} // Open GitHub links in new tab
         rel={github ? "noopener noreferrer" : undefined}

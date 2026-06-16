@@ -4,10 +4,15 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Header = () => {
+type HeaderProps = {
+  basePath?: string;
+};
+
+const Header = ({ basePath = "" }: HeaderProps) => {
   const [isShrunk, setIsShrunk] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const href = (path: string) => `${basePath}${path}`;
 
   // Scroll → decide once, with hysteresis
   useEffect(() => {
@@ -45,7 +50,7 @@ const Header = () => {
     >
       <nav className="flex items-center justify-between relative" ref={navRef}>
         <div className="text-xl md:text-xl font-body font-bold px-2">
-          <Link href="/" className="no-underline hover:no-underline text-accent">
+          <Link href={basePath || "/"} className="no-underline hover:no-underline text-accent">
             haoji.wang
           </Link>
         </div>
@@ -69,17 +74,17 @@ const Header = () => {
           {/* Desktop Navigation */}
           <ul className="hidden md:flex space-x-8 font-sans text-lg tracking-wide">
             <li>
-              <Link href="/blog" className="hover:underline">
+              <Link href={href("/blog")} className="hover:underline">
                 BLOG
               </Link>
             </li>
             <li>
-              <Link href="/work" className="hover:underline">
+              <Link href={href("/work")} className="hover:underline">
                 WORK
               </Link>
             </li>
             <li>
-              <Link href="/about" className="hover:underline">
+              <Link href={href("/about")} className="hover:underline">
                 ABOUT
               </Link>
             </li>
@@ -129,17 +134,17 @@ const Header = () => {
               {/* Links in one row, centred vertically */}
               <ul className="mx-auto flex flex-row gap-10 font-sans text-lg tracking-wide">
                 <li>
-                  <Link href="/blog" onClick={() => setIsOpen(false)} className="hover:underline">
+                  <Link href={href("/blog")} onClick={() => setIsOpen(false)} className="hover:underline">
                     BLOG
                   </Link>
                 </li>
                 <li>
-                  <Link href="/work" onClick={() => setIsOpen(false)} className="hover:underline">
+                  <Link href={href("/work")} onClick={() => setIsOpen(false)} className="hover:underline">
                     WORK
                   </Link>
                 </li>
                 <li>
-                  <Link href="/about" onClick={() => setIsOpen(false)} className="hover:underline">
+                  <Link href={href("/about")} onClick={() => setIsOpen(false)} className="hover:underline">
                     ABOUT
                   </Link>
                 </li>

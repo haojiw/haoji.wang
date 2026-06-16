@@ -1,5 +1,5 @@
-import ProjectCard from '@/components/ProjectCard';
-import { PROJECTS } from '../../lib/projects';
+import ProjectCard from '../components/ProjectCard';
+import { PROJECTS } from '@/lib/projects';
 
 export default function ProjectsPage() {
   return (
@@ -19,6 +19,7 @@ export default function ProjectsPage() {
             description={project.description}
             slug={project.slug}
             github={project.github}
+            basePath="/legacy/work"
           />
         ))}
       </div>
