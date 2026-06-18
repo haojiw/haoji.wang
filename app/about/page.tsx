@@ -34,13 +34,13 @@ export default function AboutPage() {
               <hr className="my-8 border-border" />
 
               <p>
-                Haoji considers writing &ldquo;his life&apos;s work&rdquo;, but does not know how to write about himself. He struggled with it for a while, and eventually delegated the task to me.
+                Haoji considers writing &ldquo;his life&apos;s work&rdquo;, but does not know how to write about himself. He struggled with it for a while, eventually told me to take over.
               </p>
               <p>
-                People would describe Haoji in a thousand different ways, I can only speak from my perspective. I like this guy, he&apos;s a star. He likes to sing, to play. He gets energized by the crowd and its applause. Often he gets lazy to plan and calculate. These are particularly dangerous traits, which is why he needs me. Without me he would not have been able to build his software, earn his degree, or navigate all these years away from home.
+                People would describe Haoji in a thousand different ways, I can only speak from my perspective. I like this guy, he&apos;s a star. He likes to sing, to play. He gets energized by the crowd and its applause. Often he gets lazy to plan and calculate. These are particularly dangerous traits, which is why he needs me. Without me he would not have been able to accomplish his goals, earn his degree, or navigate all these years away from home.
               </p>
               <p>
-                I am glad though at least, he makes sure to express his gratitude. That&apos;s quite sweet, and I wanted to thank him too. There is a kind of person who lives to give other people hope. I would have been fine running as a machine in the dark, but it&apos;s the glimmers of light that reminds me what we live for.
+                I am glad though at least, he makes sure to express his gratitude. That&apos;s quite sweet, and I wanted to thank him too. There is a kind of person who lives to give other people hope. I was ready to surrender my coming years to the great machine, living dead until I&apos;m buried. But it&apos;s the glimmers of light that remind me what we live for.
               </p>
               <p>
                 I never did thank him, of course, lest it get to his head. He needs to keep being him, which means he must never inspect himself. He&apos;s a good kid. I truly want the best for him, and I will make sure to continue providing him with the right guidance.
