@@ -4,7 +4,8 @@ import { siteThemeStyle } from './theme/css-vars';
 
 export const metadata: Metadata = {
   title: 'Haoji Wang',
-  description: 'Personal website of Haoji Wang',
+  description:
+    'Writer and builder of PaperHouse — the unifying notebook, the interface of thought, the time machine of mind.',
 };
 
 export default function SiteRootLayout({

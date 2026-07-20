@@ -19,41 +19,51 @@ export const layout = {
 
 export const type = {
   nav: 'font-body text-base text-muted',
-  headerLink: 'font-sans text-base text-text',
+  headerLink: 'font-body text-lg text-muted',
   meta: 'font-body text-base text-muted',
-  homeTitle: 'font-body text-2xl leading-none text-text',
-  homeLead: 'font-body text-lg leading-relaxed',
-  homeSectionTitle: 'font-sans text-lg leading-snug text-text',
-  chineseHomeSectionTitle: 'font-sans text-lg leading-snug text-text',
+  homeTitle: 'font-handwriting text-3xl leading-none text-text',
+  homeLead: 'font-body text-xl leading-relaxed',
+  homeSectionTitle:
+    'font-body text-sm uppercase tracking-[0.22em] text-muted',
+  chineseHomeSectionTitle:
+    'font-chinese text-sm tracking-[0.5em] text-muted',
   footer: `${space.footerTop} border-t border-border py-6 font-body text-base text-muted`,
   sectionLabel: 'text-lg leading-none text-muted',
   pageLabel: 'mb-8 font-body text-lg text-muted',
   chinesePageLabel: 'mb-8 font-chinese text-lg text-muted',
-  linkTitle: 'block font-body text-lg leading-relaxed no-underline transition hover:text-brand hover:no-underline',
-  chineseLinkTitle: 'block font-chinese text-lg leading-relaxed no-underline transition hover:text-brand hover:no-underline',
-  description: 'mt-2 font-body text-base leading-relaxed text-muted',
-  chineseDescription: 'mt-2 font-chinese text-base leading-relaxed text-muted',
-  articleTitle: 'mt-4 max-w-2xl font-body text-2xl leading-snug text-text md:text-3xl',
-  chineseArticleTitle: 'mt-4 max-w-2xl font-chinese text-2xl leading-snug text-text md:text-3xl',
-  articleBody: 'mt-8 max-w-2xl space-y-5 font-body text-lg leading-relaxed',
-  chineseArticleBody: 'mt-8 max-w-2xl space-y-5 font-chinese text-lg leading-relaxed',
+  linkTitle:
+    'block font-body text-xl leading-relaxed no-underline transition hover:text-brand hover:no-underline',
+  chineseLinkTitle:
+    'block font-chinese text-lg leading-relaxed no-underline transition hover:text-brand hover:no-underline',
+  description: 'mt-1 font-body text-base leading-relaxed text-muted',
+  chineseDescription: 'mt-1 font-chinese text-base leading-relaxed text-muted',
+  articleTitle:
+    'mt-4 max-w-2xl font-body text-3xl leading-snug text-text md:text-4xl',
+  chineseArticleTitle:
+    'mt-4 max-w-2xl font-chinese text-2xl leading-snug text-text md:text-3xl',
+  articleBody: 'mt-8 max-w-2xl space-y-5 font-body text-xl leading-relaxed',
+  chineseArticleBody:
+    'mt-8 max-w-2xl space-y-5 font-chinese text-lg leading-loose',
 };
 
 export const prose = {
-  root: 'mt-8 max-w-2xl space-y-5 font-body text-lg leading-relaxed',
-  chineseRoot: 'mt-8 max-w-2xl space-y-5 font-chinese text-lg leading-relaxed',
+  root: 'mt-8 max-w-2xl space-y-5 font-body text-xl leading-relaxed',
+  chineseRoot: 'mt-8 max-w-2xl space-y-5 font-chinese text-lg leading-loose',
   paragraph: '',
-  heading2: 'mt-12 font-body text-xl leading-snug text-text',
+  heading2: 'mt-12 font-body text-2xl leading-snug text-text',
   chineseHeading2: 'mt-12 font-chinese text-xl leading-snug text-text',
-  heading3: 'mt-8 font-body text-lg leading-snug text-text',
-  chineseHeading3: 'mt-8 font-chinese text-lg leading-snug text-text',
+  heading3: 'mt-10 font-body text-xl leading-snug text-text',
+  chineseHeading3: 'mt-10 font-chinese text-lg leading-snug text-text',
   link: 'text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand',
   list: 'my-5 space-y-2 pl-6',
   unorderedList: 'list-disc',
   orderedList: 'list-decimal',
   listItem: 'pl-1',
-  quote: 'my-7 border-l border-border pl-5 text-muted',
+  quote:
+    'my-7 border-l-2 border-brand/40 pl-5 italic text-muted',
+  chineseQuote: 'my-7 border-l-2 border-brand/40 pl-5 text-muted',
   inlineCode: 'rounded bg-border/35 px-1 py-0.5 font-mono text-[0.9em]',
-  codeBlock: 'my-7 overflow-x-auto rounded bg-border/25 p-4 font-mono text-sm leading-relaxed',
+  codeBlock:
+    'my-7 overflow-x-auto rounded bg-border/25 p-4 font-mono text-sm leading-relaxed',
   rule: 'my-10 border-t border-border',
 };

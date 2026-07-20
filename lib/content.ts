@@ -2,14 +2,20 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-export type ContentSection = 'writing' | 'wen';
+export type ContentSection = 'writing' | 'wen' | 'paperhouse' | 'paperhouse2016';
+
+export type PostLanguage = 'en' | 'zh';
 
 export type PostMeta = {
   slug: string;
   section: ContentSection;
   title: string;
   date: string;
+  dateDisplay: string;
   description: string;
+  language: PostLanguage;
+  pair: string;
+  order: number;
 };
 
 export type Post = PostMeta & {
@@ -19,6 +25,8 @@ export type Post = PostMeta & {
 const contentDirs: Record<ContentSection, string> = {
   writing: 'content/writing',
   wen: 'content/wen',
+  paperhouse: 'content/paperhouse',
+  paperhouse2016: 'content/paperhouse/2016',
 };
 
 function getSectionDir(section: ContentSection) {
@@ -42,7 +50,11 @@ function parsePostFile(section: ContentSection, filePath: string, slug: string):
     section,
     title: String(data.title ?? slug),
     date: normalizeDate(data.date),
+    dateDisplay: String(data.dateDisplay ?? ''),
     description: String(data.description ?? ''),
+    language: data.language === 'zh' ? 'zh' : 'en',
+    pair: String(data.pair ?? ''),
+    order: Number(data.order ?? 0),
     content,
   };
 }
@@ -71,9 +83,17 @@ export function getPost(section: ContentSection, slug: string): Post | null {
 }
 
 export function getPosts(section: ContentSection): PostMeta[] {
-  return getPostSlugs(section)
+  const posts = getPostSlugs(section)
     .map((slug) => getPost(section, slug))
-    .filter((post): post is Post => post !== null)
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(({ content, ...meta }) => meta);
+    .filter((post): post is Post => post !== null);
+
+  const hasOrder = posts.some((post) => post.order !== 0);
+
+  posts.sort((a, b) =>
+    hasOrder
+      ? a.order - b.order
+      : new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  return posts.map(({ content, ...meta }) => meta);
 }

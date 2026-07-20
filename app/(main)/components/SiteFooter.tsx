@@ -52,7 +52,7 @@ export default function SiteFooter() {
       <div className="grid grid-cols-1 items-center gap-6 sm:grid-cols-3">
         <div className="flex items-center justify-center sm:justify-start">
           <a
-            href="mailto:on3hodge@gmail.com"
+            href="mailto:haoji.one@gmail.com"
             className="inline-flex h-6 w-6 items-center justify-center text-muted no-underline transition hover:text-brand hover:no-underline"
             aria-label="Email"
           >
@@ -80,7 +80,7 @@ export default function SiteFooter() {
             <LinkedInIcon />
           </a>
           <a
-            href="https://x.com/haoji_1"
+            href="https://x.com/haoji_w"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex h-6 w-6 items-center justify-center text-muted no-underline transition hover:text-brand hover:no-underline"

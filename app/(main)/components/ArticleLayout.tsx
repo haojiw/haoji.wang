@@ -1,11 +1,16 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import SiteHeader, { type NavPage } from './SiteHeader';
 import { layout, page, type as typeStyles } from '../theme';
 
 type ArticleLayoutProps = {
   title: string;
   date: string;
+  dateDisplay?: string;
   language?: 'en' | 'zh';
+  active?: NavPage;
+  backHref?: string;
+  backLabel?: string;
   children: ReactNode;
 };
 
@@ -17,9 +22,9 @@ function formatDate(date: string, language: 'en' | 'zh') {
   }
 
   if (language === 'zh') {
-    const year = parsed.getFullYear();
-    const month = String(parsed.getMonth() + 1).padStart(2, '0');
-    const day = String(parsed.getDate()).padStart(2, '0');
+    const year = parsed.getUTCFullYear();
+    const month = String(parsed.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(parsed.getUTCDate()).padStart(2, '0');
     return `${year}.${month}.${day}`;
   }
 
@@ -27,13 +32,18 @@ function formatDate(date: string, language: 'en' | 'zh') {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
 export default function ArticleLayout({
   title,
   date,
+  dateDisplay,
   language = 'en',
+  active = 'blog',
+  backHref,
+  backLabel,
   children,
 }: ArticleLayoutProps) {
   const isChinese = language === 'zh';
@@ -41,19 +51,25 @@ export default function ArticleLayout({
   return (
     <main className={page.shell}>
       <div className={page.container}>
-        <header className={layout.articleHeader}>
-          <h1 className={typeStyles.homeTitle}>
-            <Link href="/" className="no-underline hover:no-underline">
-              haoji.wang
-            </Link>
-          </h1>
-        </header>
+        <div className={layout.articleHeader}>
+          <SiteHeader active={active} />
+        </div>
 
-        <article>
+        <article className="reveal">
+          {backHref && (
+            <Link
+              href={backHref}
+              className="mb-4 inline-block font-body text-base text-muted no-underline transition hover:text-brand hover:no-underline"
+            >
+              ← {backLabel ?? 'back'}
+            </Link>
+          )}
           <h1 className={isChinese ? typeStyles.chineseArticleTitle : typeStyles.articleTitle}>
             {title}
           </h1>
-          <time className={`mt-3 block ${typeStyles.meta}`}>{formatDate(date, language)}</time>
+          <time className={`mt-3 block ${typeStyles.meta}`}>
+            {dateDisplay || formatDate(date, language)}
+          </time>
           {children}
         </article>
       </div>

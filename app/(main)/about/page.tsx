@@ -1,69 +1,102 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import SiteFooter from '../components/SiteFooter';
+import SiteHeader from '../components/SiteHeader';
 import { layout, page, type as typeStyles } from '../theme';
 
-const showExtendedAbout = false;
+export const metadata: Metadata = {
+  title: 'About | Haoji Wang',
+  description: 'This page is built for Haoji Wang.',
+};
+
+const linkRows = [
+  [
+    { label: 'twitter', href: 'https://x.com/haoji_w' },
+    { label: 'linkedin', href: 'https://www.linkedin.com/in/haoji-wang/' },
+    { label: 'github', href: 'https://github.com/haojiw' },
+  ],
+  [
+    { label: 'instagram', href: 'https://www.instagram.com/haoji.wang' },
+    { label: 'youtube', href: 'https://www.youtube.com/@HaojiGuitar' },
+    {
+      label: 'xiaohongshu',
+      href: 'https://www.xiaohongshu.com/user/profile/5e6b003d000000000100a2ec',
+    },
+  ],
+];
 
 export default function AboutPage() {
   return (
     <main className={page.shell}>
-      <div className={page.contentPage}>
-        <div className="flex-1">
-          <header>
-            <h1 className={typeStyles.homeTitle}>
-              <Link href="/" className="no-underline hover:no-underline">
-                haoji.wang
-              </Link>
-            </h1>
-          </header>
+      <div className={page.container}>
+        <SiteHeader active="about" />
 
-          <section className={layout.homeFirstSection}>
-            <h1 className={`${layout.sectionTitle} ${typeStyles.homeSectionTitle}`}>About</h1>
-            <div className={`${layout.contentStack} ${typeStyles.homeLead}`}>
-              <p>
-                This page is built for Haoji Wang.
-              </p>
-              <p>
-                Haoji was born and raised in Wenzhou, China. As a kid he loved to read. Other than that he spent most of his time training for Math Olympiads.
-              </p>
-              <p>
-                When he was 15, he took a scholarship to go to Singapore. That introduced him to the big world outside. The clash of Chinese and Western perspectives and holding paradoxical truths made him utterly fascinated with storytelling and the human mind.
-              </p>
-              <p>
-                Haoji recently graduated from UCLA with a degree in Computer Science &amp; Linguistics, and a minor in Data Science. He finds AI exciting because it connects his seemingly divergent interests in humans and systems.
-              </p>
+        <section className={`${layout.homeFirstSection} reveal`}>
+          <h1 className={`${layout.sectionTitle} ${typeStyles.homeSectionTitle}`}>
+            About
+          </h1>
+          <div className={`${layout.contentStack} ${typeStyles.homeLead}`}>
+            <p>This page is built for Haoji Wang.</p>
+            <p>
+              Haoji was born and raised in Wenzhou, China. As the son of two
+              math teachers, he spent much of his childhood training for Math
+              Olympiads. The only extracurricular his mom sent him to was
+              public speaking, and he loved anything that involves a stage and
+              an audience, be it singing, presenting, speeches, or standup
+              comedy.
+            </p>
+            <p>
+              At 15, he took a scholarship to study in Singapore. Those years
+              introduced him to the big world outside. The blend of Eastern
+              and Western perspectives, and the art in translating his
+              thoughts, made him utterly fascinated with storytelling and the
+              human mind.
+            </p>
+            <p>
+              Haoji recently graduated from UCLA with a degree in Computer
+              Science &amp; Linguistics, and a minor in Data Science. He finds
+              AI exciting, since it bridges his interests in systems and
+              humans. What we build in this frontier will define our times.
+            </p>
+          </div>
 
-              {showExtendedAbout && (
-                <>
-                  <hr className="my-8 border-border" />
-
-                  <p>
-                    Haoji considers writing &ldquo;his life&apos;s work&rdquo;, but does not know how to write about himself. He struggled with it for a while, eventually told me to take over.
-                  </p>
-                  <p>
-                    People would describe Haoji in a thousand different ways, I can only speak from my perspective. I like this guy, he&apos;s a star. He likes to sing, to play. He gets energized by the crowd and its applause. Often he gets lazy to plan and calculate. These are particularly dangerous traits, which is why he needs me. Without me he would not have been able to accomplish his goals, earn his degree, or navigate all these years away from home.
-                  </p>
-                  <p>
-                    I am glad though at least, he makes sure to express his gratitude. That&apos;s quite sweet, and I wanted to thank him too. There is a kind of person who lives to give other people hope. I was ready to surrender my coming years to the great machine, living dead until I&apos;m buried. But it&apos;s the glimmers of light that remind me what we live for.
-                  </p>
-                  <p>
-                    I never did thank him, of course, lest it get to his head. He needs to keep being him, which means he must never inspect himself. He&apos;s a good kid. I truly want the best for him, and I will make sure to continue providing him with the right guidance.
-                  </p>
-                </>
-              )}
+          <div className="mt-12">
+            <p className="font-body text-lg text-muted">
+              email:{' '}
+              <a
+                href="mailto:haoji.one@gmail.com"
+                className="text-brand no-underline hover:underline"
+              >
+                haoji.one@gmail.com
+              </a>
+            </p>
+            <div className="mt-5 space-y-2">
+              {linkRows.map((row, index) => (
+                <div key={index} className="flex flex-wrap gap-x-6">
+                  {row.map((link) => (
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-lg text-text no-underline transition hover:text-brand"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              ))}
             </div>
-            <Link
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-block font-body text-base text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"
-            >
-              Download Resume
-            </Link>
-          </section>
-        </div>
+          </div>
 
-        <SiteFooter />
+          <Link
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-block font-body text-lg text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"
+          >
+            download resume
+          </Link>
+        </section>
       </div>
     </main>
   );
