@@ -19,14 +19,6 @@
 }
 
 @font-face {
-  font-family: 'Cormorant Garamond';
-  src: url('/fonts/CormorantGaramond-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Lora';
   src: url('/fonts/Lora-Regular.woff2') format('woff2');
   font-weight: normal;
@@ -43,8 +35,8 @@
 }
 
 @font-face {
-  font-family: 'Indie Flower';
-  src: url('/fonts/IndieFlower-Regular.woff2') format('woff2');
+  font-family: 'Caveat';
+  src: url('/fonts/Caveat-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -57,7 +49,7 @@
     --font-body: 'Lora';
     --font-chinese: 'Noto Serif SC', 'Lora';
     --font-sans-2: 'Space Grotesk';
-    --font-handwriting: 'Indie Flower';
+    --font-handwriting: 'Caveat';
   }
 
   html {
