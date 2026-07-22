@@ -21,7 +21,7 @@ export default function PaperHouse2026Page() {
 
             <div className={`${page.contentMeasure} space-y-5 ${typeStyles.homeLead}`}>
               <p className="font-handwriting text-3xl text-accent">
-                I'm still organizing and cleaning up my voice notes from 2026. 
+                I&apos;m still organizing and cleaning up my voice notes from 2026.
               </p>
               <p className="font-handwriting text-3xl text-accent">
                 Check back later. 
