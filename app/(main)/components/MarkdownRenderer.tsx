@@ -98,6 +98,43 @@ function PdfEmbed({ src, title }: { src: string; title: string }) {
   );
 }
 
+function PhotoPair({
+  firstSrc,
+  firstAlt,
+  secondSrc,
+  secondAlt,
+}: {
+  firstSrc: string;
+  firstAlt: string;
+  secondSrc: string;
+  secondAlt: string;
+}) {
+  const photos = [
+    { src: firstSrc, alt: firstAlt },
+    { src: secondSrc, alt: secondAlt },
+  ];
+
+  return (
+    <div className="!my-8 mr-auto grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4">
+      {photos.map((photo) => (
+        <figure
+          key={photo.src}
+          className="relative aspect-[4/3] overflow-hidden bg-black/5"
+        >
+          {/* Keep the original photo file intact rather than optimizing it. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            loading="lazy"
+            className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+          />
+        </figure>
+      ))}
+    </div>
+  );
+}
+
 function createComponents(language: 'en' | 'zh') {
   const isChinese = language === 'zh';
 
@@ -146,6 +183,7 @@ function createComponents(language: 'en' | 'zh') {
     Note,
     Signature,
     PdfEmbed,
+    PhotoPair,
     Spacer,
     Space: Spacer,
   };
