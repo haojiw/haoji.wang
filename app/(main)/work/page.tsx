@@ -56,9 +56,8 @@ export default function WorkPage() {
                 className="text-brand no-underline hover:underline"
               >
                 PaperHouse
-              </a>{' '}
-              — the unifying notebook, the interface of thought, the time
-              machine of mind.
+              </a>
+              , a digital notebook.
             </p>
 
             <WorkCarousel />
