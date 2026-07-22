@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import SiteHeader from '../components/SiteHeader';
 import { layout, page, type as typeStyles } from '../theme';
@@ -59,7 +60,30 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-12 mr-auto grid w-full max-w-2xl grid-cols-2 gap-3 sm:gap-4">
+            <figure className="relative aspect-square overflow-hidden bg-black/5">
+              <Image
+                src="/images/haoji/pic2.jpg"
+                alt="Haoji Wang in graduation regalia beside a campus archway"
+                fill
+                unoptimized
+                sizes="(max-width: 640px) 46vw, 360px"
+                className="object-cover object-[30%_center] transition-transform duration-500 hover:scale-[1.02]"
+              />
+            </figure>
+            <figure className="relative aspect-square overflow-hidden bg-black/5">
+              <Image
+                src="/images/haoji/pic1.jpg"
+                alt="Haoji Wang in graduation regalia by a campus fountain"
+                fill
+                unoptimized
+                sizes="(max-width: 640px) 46vw, 360px"
+                className="object-cover object-[75%_center] transition-transform duration-500 hover:scale-[1.02]"
+              />
+            </figure>
+          </div>
+
+          <div className="mt-20">
             <p className="font-body text-lg text-muted">
               email:{' '}
               <a
