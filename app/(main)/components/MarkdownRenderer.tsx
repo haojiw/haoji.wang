@@ -50,10 +50,27 @@ function Note({ children }: { children: React.ReactNode }) {
 
 function Signature({ name, date }: { name: string; date: string }) {
   return (
-    <div className="mt-14 text-right">
+    <div className="!mt-20 text-right">
       <p className="font-handwriting text-2xl text-text sm:text-3xl">{name}</p>
       <p className="mt-1 font-body text-base text-muted">{date}</p>
     </div>
+  );
+}
+
+type SpacerSize = 'sm' | 'md' | 'lg';
+
+const spacerHeights: Record<SpacerSize, string> = {
+  sm: 'h-4',
+  md: 'h-8',
+  lg: 'h-12',
+};
+
+function Spacer({ size = 'md' }: { size?: SpacerSize }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`!my-0 ${spacerHeights[size] ?? spacerHeights.md}`}
+    />
   );
 }
 
@@ -61,6 +78,9 @@ function createComponents(language: 'en' | 'zh') {
   const isChinese = language === 'zh';
 
   return {
+    h1: (props: any) => (
+      <h1 {...props} className={isChinese ? prose.chineseHeading1 : prose.heading1} />
+    ),
     h2: (props: any) => (
       <h2 {...props} className={isChinese ? prose.chineseHeading2 : prose.heading2} />
     ),
@@ -101,6 +121,8 @@ function createComponents(language: 'en' | 'zh') {
     ScanRow,
     Note,
     Signature,
+    Spacer,
+    Space: Spacer,
   };
 }
 
