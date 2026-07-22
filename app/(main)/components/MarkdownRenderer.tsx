@@ -74,6 +74,30 @@ function Spacer({ size = 'md' }: { size?: SpacerSize }) {
   );
 }
 
+function PdfEmbed({ src, title }: { src: string; title: string }) {
+  return (
+    <figure className="!my-8 overflow-hidden rounded-[3px] border border-border bg-white shadow-[0_18px_40px_-18px_rgba(37,34,31,0.4)]">
+      <figcaption className="flex items-center justify-between gap-4 border-b border-border px-4 py-3 font-body text-sm text-muted sm:px-5">
+        <span>{title}</span>
+        <a
+          href={src}
+          target="_blank"
+          rel="noreferrer"
+          className="shrink-0 text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"
+        >
+          Open PDF
+        </a>
+      </figcaption>
+      <iframe
+        src={`${src}#view=FitH`}
+        title={title}
+        loading="lazy"
+        className="h-[72vh] min-h-[34rem] w-full bg-white sm:min-h-[42rem]"
+      />
+    </figure>
+  );
+}
+
 function createComponents(language: 'en' | 'zh') {
   const isChinese = language === 'zh';
 
@@ -121,6 +145,7 @@ function createComponents(language: 'en' | 'zh') {
     ScanRow,
     Note,
     Signature,
+    PdfEmbed,
     Spacer,
     Space: Spacer,
   };

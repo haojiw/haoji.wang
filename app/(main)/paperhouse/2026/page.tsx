@@ -21,11 +21,23 @@ export default function PaperHouse2026Page() {
 
             <div className={`${page.contentMeasure} space-y-5 ${typeStyles.homeLead}`}>
               <p className="font-handwriting text-3xl text-accent">
-                This room is still being written.
+                I'm still organizing and cleaning up my voice notes from 2026. 
+              </p>
+              <p className="font-handwriting text-3xl text-accent">
+                Check back later. 
               </p>
               <p>
-                It has not been finished. Neither is the Sagrada Família.
-                Therefore, please allow visitors — the scaffolding is over at{' '}
+                My written work this year is over at{' '}
+                <Link
+                  href="/blog"
+                  className="text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"
+                >
+                  blog
+                </Link>
+                {' '}page.
+              </p>
+              <p>
+                Some interesting themes were explored in{' '}
                 <Link
                   href="/blog/basilica-de-san-papel"
                   className="text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"

@@ -38,6 +38,7 @@ export default function BlogPost({ params }: BlogPostParams) {
     <ArticleLayout
       title={post.title}
       date={post.date}
+      dateDisplay={post.dateDisplay}
     >
       <MarkdownRenderer source={post.content} />
     </ArticleLayout>
