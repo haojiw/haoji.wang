@@ -19,7 +19,7 @@ const whyReasons = [
   {
     summary: "I want an unified personal Google",
     detail:
-      "An idea I can't find again is an idea I effectively never had. I write a lot but my writings are everywhere. Yes I had an inspiration and wrote it down somewhere; where is it? Apple Notes, my notebook, Google Doc, …, Claude? There should be one unifying database for everything you've ever written, with seamless search and a connected graph. Good ideas can compound, which is why they must be in one place. If we can build that corpus, it will be the strongest personal context layer.",
+      "An idea I can't find again is an idea I effectively never had. I write a lot but my writings are everywhere. Yes I had an inspiration and wrote it down somewhere; where is it? Apple Notes, my notebook, Google Doc, …, Claude? There should be one unifying database for everything you've ever written, with semantic search and a connected graph. Good ideas can compound, which is why they must be in one place. If we can build that corpus, it will be the strongest personal context layer.",
   },
   {
     summary:
