@@ -13,6 +13,7 @@ export type PostMeta = {
   date: string;
   dateDisplay: string;
   description: string;
+  readingMinutes: number;
   language: PostLanguage;
   pair: string;
   order: number;
@@ -52,6 +53,7 @@ function parsePostFile(section: ContentSection, filePath: string, slug: string):
     date: normalizeDate(data.date),
     dateDisplay: String(data.dateDisplay ?? ''),
     description: String(data.description ?? ''),
+    readingMinutes: Number(data.readingMinutes ?? 0),
     language: data.language === 'zh' ? 'zh' : 'en',
     pair: String(data.pair ?? ''),
     order: Number(data.order ?? 0),
