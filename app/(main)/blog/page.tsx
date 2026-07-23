@@ -84,7 +84,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <figure className="mt-16 w-64 max-w-full reveal reveal-3">
+        <figure className="mt-24 w-96 max-w-full reveal reveal-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/work/paperhouse-cover.jpg"
