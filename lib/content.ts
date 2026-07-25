@@ -17,6 +17,7 @@ export type PostMeta = {
   language: PostLanguage;
   pair: string;
   order: number;
+  unlisted: boolean;
 };
 
 export type Post = PostMeta & {
@@ -57,6 +58,7 @@ function parsePostFile(section: ContentSection, filePath: string, slug: string):
     language: data.language === 'zh' ? 'zh' : 'en',
     pair: String(data.pair ?? ''),
     order: Number(data.order ?? 0),
+    unlisted: data.unlisted === true,
     content,
   };
 }
@@ -87,7 +89,7 @@ export function getPost(section: ContentSection, slug: string): Post | null {
 export function getPosts(section: ContentSection): PostMeta[] {
   const posts = getPostSlugs(section)
     .map((slug) => getPost(section, slug))
-    .filter((post): post is Post => post !== null);
+    .filter((post): post is Post => post !== null && !post.unlisted);
 
   const hasOrder = posts.some((post) => post.order !== 0);
 

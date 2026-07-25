@@ -24,6 +24,7 @@ export function generateMetadata({ params }: WenPostParams): Metadata {
   return {
     title: `${post.title} | Haoji Wang`,
     description: post.description,
+    robots: post.unlisted ? { index: false, follow: false } : undefined,
   };
 }
 
