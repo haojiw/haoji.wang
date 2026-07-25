@@ -16,7 +16,7 @@ const linkRows = [
     { label: 'github', href: 'https://github.com/haojiw' },
   ],
   [
-    { label: 'instagram', href: 'https://www.instagram.com/haoji.wang' },
+    { label: 'instagram', href: 'https://www.instagram.com/haoji.cooks' },
     { label: 'youtube', href: 'https://www.youtube.com/@HaojiGuitar' },
     {
       label: 'xiaohongshu',
@@ -118,7 +118,7 @@ export default function AboutPage() {
             rel="noopener noreferrer"
             className="mt-10 inline-block font-body text-lg text-brand underline decoration-brand/30 underline-offset-4 transition hover:decoration-brand"
           >
-            download resume
+            link to resume
           </Link>
         </section>
       </div>
